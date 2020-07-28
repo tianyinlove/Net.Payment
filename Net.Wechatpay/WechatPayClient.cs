@@ -29,7 +29,7 @@ namespace Net.Wechatpay
             var result = request.ToObject<WechatNotifyResponse>();
             if (result.ReturnCode != WechatConstants.SUCCESS && result.ResultCode != WechatConstants.SUCCESS)
             {
-                throw new Exception("微信服务接口异常");
+                throw new Exception(result.ReturnMsg);
             }
             return result;
         }
@@ -78,7 +78,21 @@ namespace Net.Wechatpay
                 throw new Exception("缺少统一支付接口必填参数notify_url");
             }
 
-            return await WechatService.ExecuteAsync(request, config, url);
+            var result = await WechatService.ExecuteAsync(request, config, url);
+            if (result.ReturnCode != WechatConstants.SUCCESS && result.ResultCode != WechatConstants.SUCCESS)
+            {
+                throw new Exception(result.ReturnMsg);
+            }
+            var data = new WechatpayData();
+            data.SetValue(WechatConstants.APPID, result.AppId);
+            data.SetValue(WechatConstants.PARTNERID, result.MchId);
+            data.SetValue(WechatConstants.PREPAYID, result.PrepayId);
+            data.SetValue(WechatConstants.PACKAGE, "Sign=WXPay");
+            data.SetValue(WechatConstants.NONCESTR, WechatService.GenerateNonceStr());
+            data.SetValue(WechatConstants.TIMESTAMP, (int)(DateTime.Now.ToUniversalTime().Ticks / 10000000 - 62135596800));
+            data.SetValue(WechatConstants.SIGN, data.MakeSign(config.SignType, config.SignKey));
+            result.Body = data.ToXml();
+            return result;
         }
 
         /// <summary>
@@ -97,7 +111,12 @@ namespace Net.Wechatpay
                 throw new Exception("订单查询接口中，out_trade_no、transaction_id至少填一个！");
             }
 
-            return await WechatService.ExecuteAsync(request, config, url);
+            var result = await WechatService.ExecuteAsync(request, config, url);
+            if (result.ReturnCode != WechatConstants.SUCCESS && result.ResultCode != WechatConstants.SUCCESS)
+            {
+                throw new Exception(result.ReturnMsg);
+            }
+            return result;
         }
 
         /// <summary>
@@ -128,7 +147,12 @@ namespace Net.Wechatpay
                 throw new Exception("退款申请接口中，缺少必填参数refund_fee！");
             }
 
-            return await WechatService.ExecuteAsync(request, config, url);
+            var result = await WechatService.ExecuteAsync(request, config, url);
+            if (result.ReturnCode != WechatConstants.SUCCESS && result.ResultCode != WechatConstants.SUCCESS)
+            {
+                throw new Exception(result.ReturnMsg);
+            }
+            return result;
         }
 
         /// <summary>
@@ -150,7 +174,12 @@ namespace Net.Wechatpay
                 throw new Exception("退款查询接口中，out_refund_no、out_trade_no、transaction_id、refund_id四个参数必填一个！");
             }
 
-            return await WechatService.ExecuteAsync(request, config, url);
+            var result = await WechatService.ExecuteAsync(request, config, url);
+            if (result.ReturnCode != WechatConstants.SUCCESS && result.ResultCode != WechatConstants.SUCCESS)
+            {
+                throw new Exception(result.ReturnMsg);
+            }
+            return result;
         }
 
         /// <summary>
@@ -169,7 +198,12 @@ namespace Net.Wechatpay
                 throw new Exception("关闭订单接口中，out_trade_no必填！");
             }
 
-            return await WechatService.ExecuteAsync(request, config, url);
+            var result = await WechatService.ExecuteAsync(request, config, url);
+            if (result.ReturnCode != WechatConstants.SUCCESS && result.ResultCode != WechatConstants.SUCCESS)
+            {
+                throw new Exception(result.ReturnMsg);
+            }
+            return result;
         }
     }
 }

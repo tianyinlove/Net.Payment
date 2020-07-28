@@ -98,7 +98,12 @@ namespace Net.Alipay
             var requestData = new AlipayTradeRefundRequest();
             requestData.SetBizModel(request);
 
-            return await client.ExecuteAsync(requestData);
+            var result = await client.ExecuteAsync(requestData);
+            if (result.Code != AlipayConstants.SuccessCode)
+            {
+                throw new Exception(result.SubMsg);
+            }
+            return result;
         }
 
         /// <summary>
@@ -116,7 +121,12 @@ namespace Net.Alipay
             var requestData = new AlipayTradeFastpayRefundQueryRequest();
             requestData.SetBizModel(request);
 
-            return await client.ExecuteAsync(requestData);
+            var result = await client.ExecuteAsync(requestData);
+            if (result.Code != AlipayConstants.SuccessCode)
+            {
+                throw new Exception(result.SubMsg);
+            }
+            return result;
         }
 
         /// <summary>
@@ -132,7 +142,12 @@ namespace Net.Alipay
             var requestData = new AlipayTradeCloseRequest();
             requestData.SetBizModel(request);
 
-            return await client.ExecuteAsync(requestData);
+            var result = await client.ExecuteAsync(requestData);
+            if (result.Code != AlipayConstants.SuccessCode)
+            {
+                throw new Exception(result.SubMsg);
+            }
+            return result;
         }
     }
 }

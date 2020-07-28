@@ -23,5 +23,9 @@ namespace Net.Wechatpay.Response
         [XmlElement("trade_type")]
         [JsonProperty("trade_type")]
         public string TradeType { get; set; }
+        /// <summary>
+        /// APP端调起支付的参数
+        /// </summary>
+        public string Body { get; set; }
     }
 }
