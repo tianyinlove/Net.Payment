@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Company>Emoney</Company>
-    <Authors>Emoney.Mobile.WebTeam</Authors>
+    <Company>Alex</Company>
+    <Authors>Alex</Authors>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Description>微信支付通用SDK
 1、App下单
