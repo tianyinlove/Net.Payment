@@ -83,14 +83,7 @@ namespace Net.Wechatpay
             {
                 throw new Exception(result.ReturnMsg);
             }
-            var data = new WechatpayData();
-            data.SetValue(WechatConstants.APPID, result.AppId);
-            data.SetValue(WechatConstants.PARTNERID, result.MchId);
-            data.SetValue(WechatConstants.PREPAYID, result.PrepayId);
-            data.SetValue(WechatConstants.PACKAGE, "Sign=WXPay");
-            data.SetValue(WechatConstants.NONCESTR, WechatService.GenerateNonceStr());
-            data.SetValue(WechatConstants.TIMESTAMP, (int)(DateTime.Now.ToUniversalTime().Ticks / 10000000 - 62135596800));
-            data.SetValue(WechatConstants.SIGN, data.MakeSign(config.SignType, config.SignKey));
+            var data = WechatService.GetAppData(config, result.PrepayId);
             result.Body = data.ToXml();
             return result;
         }

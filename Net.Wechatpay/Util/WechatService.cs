@@ -146,7 +146,10 @@ namespace Net.Wechatpay
                 throw new Exception("缺少统一支付接口必填参数notify_url");
             }
 
-            return await ExecuteAsync(inputObj, config, url, false, timeOut);
+            var result = await ExecuteAsync(inputObj, config, url, false, timeOut);
+            var data = GetAppData(config, result.GetValue("prepay_id"));
+            result.SetValue("body", data.ToXml());
+            return result;
         }
 
         /// <summary>
@@ -184,6 +187,25 @@ namespace Net.Wechatpay
             requestData.FromObject(request);
             var response = await ExecuteAsync(requestData, config, url, isUseCert, timeout);
             return response.ToObject<T>();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="config"></param>
+        /// <param name="prepay_id"></param>
+        /// <returns></returns>
+        public static WechatpayData GetAppData(WechatpayConfig config, object prepay_id)
+        {
+            var data = new WechatpayData();
+            data.SetValue(WechatConstants.APPID, config.APPID);
+            data.SetValue(WechatConstants.PARTNERID, config.MCHID);
+            data.SetValue(WechatConstants.PREPAYID, prepay_id);
+            data.SetValue(WechatConstants.PACKAGE, "Sign=WXPay");
+            data.SetValue(WechatConstants.NONCESTR, WechatService.GenerateNonceStr());
+            data.SetValue(WechatConstants.TIMESTAMP, (int)(DateTime.Now.ToUniversalTime().Ticks / 10000000 - 62135596800));
+            data.SetValue(WechatConstants.SIGN, data.MakeSign(config.SignType, config.SignKey));
+            return data;
         }
 
         /// <summary>
