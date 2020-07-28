@@ -19,7 +19,7 @@ namespace Net.Wechatpay
     /// 这样设计的好处是可扩展性强，用户可随意对协议进行更改而不用重新设计数据结构，
     /// 还可以随意组合出不同的协议数据包，不用为每个协议设计一个数据包结构
     /// </summary>
-    public class WechatPayData
+    public class WechatpayData
     {
         //采用排序的Dictionary的好处是方便对数据包进行签名，不用再签名之前再做一次排序
         private SortedDictionary<string, object> m_values = new SortedDictionary<string, object>();

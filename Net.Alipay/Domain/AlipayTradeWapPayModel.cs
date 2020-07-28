@@ -93,7 +93,7 @@ namespace Net.Alipay.Domain
         /// 销售产品码，商家和支付宝签约的产品码
         /// </summary>
         [XmlElement("product_code")]
-        public string ProductCode { get; set; }
+        public string ProductCode { get; set; } = AlipayConstants.QUICK_WAP_WAY;
 
         /// <summary>
         /// 优惠参数  注：仅与支付宝协商后可用
