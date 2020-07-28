@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Authors>Emoney.Mobile.WebTeam</Authors>
-    <Company>Emoney</Company>
+    <Authors>Alex</Authors>
+    <Company>Alex</Company>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Description>支付宝支付通用SDK
 1、app 支付接口 2.0
@@ -12,7 +12,7 @@
 4、交易退款接口
 5、交易关闭接口
 6、交易退款查询接口
-7、查询账单下载地址接口</Description>
+7、支付成功回调</Description>
     <Version>1.0.2</Version>
   </PropertyGroup>
 

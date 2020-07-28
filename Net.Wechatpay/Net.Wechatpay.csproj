@@ -5,8 +5,14 @@
     <Company>Emoney</Company>
     <Authors>Emoney.Mobile.WebTeam</Authors>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Description>微信支付通用SDK</Description>
-    <Version>1.0.2</Version>
+    <Description>微信支付通用SDK
+1、App下单
+2、交易查询接口
+3、交易退款接口
+4、交易关闭接口
+5、交易退款查询接口
+6、支付成功回调</Description>
+    <Version>1.0.3</Version>
   </PropertyGroup>
 
   <ItemGroup>
