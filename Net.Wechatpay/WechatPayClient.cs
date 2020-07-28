@@ -19,14 +19,19 @@ namespace Net.Wechatpay
         /// <param name="request"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public WechatNotifyResponse Notify(WechatpayData request, WechatpayConfig config)
+        public static WechatNotifyResponse Notify(WechatpayData request, WechatpayConfig config)
         {
             //验证签名,不通过会抛异常
             if (!request.CheckSign(config.SignType, config.SignKey))
             {
                 throw new Exception("签名校验失败");
             }
-            return request.ToObject<WechatNotifyResponse>();
+            var result = request.ToObject<WechatNotifyResponse>();
+            if (result.ReturnCode != WechatConstants.SUCCESS && result.ResultCode != WechatConstants.SUCCESS)
+            {
+                throw new Exception("微信服务接口异常");
+            }
+            return result;
         }
 
         /// <summary>

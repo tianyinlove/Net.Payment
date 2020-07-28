@@ -159,12 +159,7 @@ namespace Net.Alipay.Domain
         /// <returns></returns>
         public void SetValue(string key, string value)
         {
-            if (string.IsNullOrEmpty(key))
-            {
-                return;
-            }
-
-            if (value is null || string.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(key) || string.IsNullOrEmpty(value))
             {
                 return;
             }

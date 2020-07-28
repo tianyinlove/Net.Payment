@@ -20,7 +20,7 @@ namespace Net.Alipay
         /// <param name="request"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public AlipayNotifyResponse Notify(AlipayData request, AlipayConfig config)
+        public static AlipayNotifyResponse Notify(AlipayData request, AlipayConfig config)
         {
             var response = request.ToObject<AlipayNotifyResponse>();
             //签名校验
@@ -38,7 +38,7 @@ namespace Net.Alipay
         /// <param name="config"></param>
         /// <param name="timeOut">超时时间</param>
         /// <returns>成功时返回，其他抛异常</returns>
-        public static AlipayTradeAppPayResponse CreateAppOrderAsync(AlipayTradeAppPayModel request, AlipayConfig config, int timeOut = 6)
+        public static AlipayTradeAppPayResponse CreateOrder(AlipayTradeAppPayModel request, AlipayConfig config, int timeOut = 6)
         {
             IAopClient client = new AopClient(AlipayConstants.GATEWAYURL, config.AppId, config.PrivateKey, config.Format, config.Version, config.SignType, config.AliPublicKey, config.Charset, config.KeyFromFile);
             var requestData = new AlipayTradeAppPayRequest();
@@ -56,7 +56,7 @@ namespace Net.Alipay
         /// <param name="config"></param>
         /// <param name="timeOut">超时时间</param>
         /// <returns>成功时返回，其他抛异常</returns>
-        public static async Task<AlipayTradeWapPayResponse> CreateWapOrderAsync(AlipayTradeWapPayModel request, AlipayConfig config, int timeOut = 6)
+        public static async Task<AlipayTradeWapPayResponse> CreateOrderAsync(AlipayTradeWapPayModel request, AlipayConfig config, int timeOut = 6)
         {
             IAopClient client = new AopClient(AlipayConstants.GATEWAYURL, config.AppId, config.PrivateKey, config.Format, config.Version, config.SignType, config.AliPublicKey, config.Charset, config.KeyFromFile);
             var requestData = new AlipayTradeWapPayRequest();

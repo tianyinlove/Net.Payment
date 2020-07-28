@@ -1,5 +1,6 @@
 ﻿using Net.Wechatpay.Constants;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -23,6 +24,51 @@ namespace Net.Wechatpay
     {
         //采用排序的Dictionary的好处是方便对数据包进行签名，不用再签名之前再做一次排序
         private SortedDictionary<string, object> m_values = new SortedDictionary<string, object>();
+
+        /**
+        * @将xml转为WxPayData对象并返回对象内部的数据
+        * @param string 待转换的xml串
+        * @return 经转换得到的Dictionary
+        * @throws WxPayException
+        */
+        public SortedDictionary<string, object> FromXml(string xml)
+        {
+            if (!string.IsNullOrEmpty(xml))
+            {
+                var xmlDoc = new XmlDocument();
+                xmlDoc.XmlResolver = null;
+                xmlDoc.LoadXml(xml);
+                var xmlNode = xmlDoc.FirstChild;//获取到根节点<xml>
+                var nodes = xmlNode.ChildNodes;
+                foreach (var xn in nodes)
+                {
+                    var xe = (XmlElement)xn;
+                    if (!xe.IsEmpty && !string.IsNullOrEmpty(xe.InnerText))
+                    {
+                        SetValue(xe.Name, xe.InnerText);//获取xml的键值对到WxPayData内部的数据中
+                    }
+                }
+            }
+            return m_values;
+        }
+
+        /// <summary>
+        /// 将Json格式数据转成网关数据
+        /// </summary>
+        /// <param name="json">json数据</param>
+        /// <returns></returns>
+        public void FromJson(string json)
+        {
+            if (!string.IsNullOrEmpty(json))
+            {
+                var jObject = JObject.Parse(json);
+                var list = jObject.Children().OfType<JProperty>();
+                foreach (var item in list)
+                {
+                    SetValue(item.Name, item.Value.ToString());
+                }
+            }
+        }
 
         /// <summary>
         /// 将数据转成网关数据
@@ -120,7 +166,19 @@ namespace Net.Wechatpay
         */
         public void SetValue(string key, object value)
         {
-            m_values[key] = value;
+            if (string.IsNullOrEmpty(key) || value == null)
+            {
+                return;
+            }
+
+            if (IsSet(key))
+            {
+                m_values[key] = value;
+            }
+            else
+            {
+                m_values.Add(key, value);
+            }
         }
 
         /**
@@ -144,21 +202,6 @@ namespace Net.Wechatpay
         public T ToObject<T>()
         {
             return JsonConvert.DeserializeObject<T>(ToJson());
-        }
-
-        /**
-         * 判断某个字段是否已设置
-         * @param key 字段名
-         * @return 若字段key已被设置，则返回true，否则返回false
-         */
-        public bool IsSet(string key)
-        {
-            object o = null;
-            m_values.TryGetValue(key, out o);
-            if (null != o)
-                return true;
-            else
-                return false;
         }
 
         /**
@@ -198,33 +241,6 @@ namespace Net.Wechatpay
             }
             xml += "</xml>";
             return xml;
-        }
-
-        /**
-        * @将xml转为WxPayData对象并返回对象内部的数据
-        * @param string 待转换的xml串
-        * @return 经转换得到的Dictionary
-        * @throws WxPayException
-        */
-        public SortedDictionary<string, object> FromXml(string xml)
-        {
-            if (string.IsNullOrEmpty(xml))
-            {
-                throw new Exception("将空的xml串转换为WxPayData不合法!");
-            }
-
-            XmlDocument xmlDoc = new XmlDocument();
-            xmlDoc.XmlResolver = null;
-            xmlDoc.LoadXml(xml);
-            XmlNode xmlNode = xmlDoc.FirstChild;//获取到根节点<xml>
-            XmlNodeList nodes = xmlNode.ChildNodes;
-            foreach (XmlNode xn in nodes)
-            {
-                XmlElement xe = (XmlElement)xn;
-                m_values[xe.Name] = xe.InnerText;//获取xml的键值对到WxPayData内部的数据中
-            }
-
-            return m_values;
         }
 
         /**
@@ -275,6 +291,21 @@ namespace Net.Wechatpay
                 str += string.Format("{0}={1}<br>", pair.Key, pair.Value.ToString());
             }
             return str;
+        }
+
+        /**
+         * 判断某个字段是否已设置
+         * @param key 字段名
+         * @return 若字段key已被设置，则返回true，否则返回false
+         */
+        public bool IsSet(string key)
+        {
+            object o = null;
+            m_values.TryGetValue(key, out o);
+            if (null != o)
+                return true;
+            else
+                return false;
         }
 
         /**
