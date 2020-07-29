@@ -43,7 +43,6 @@ namespace Alipay.AspNetCore
             IAopClient client = new AopClient(AlipayConstants.GATEWAYURL, config.AppId, config.PrivateKey, config.Format, config.Version, config.SignType, config.AliPublicKey, config.Charset, config.KeyFromFile);
             var requestData = new AlipayTradeAppPayRequest();
             requestData.SetNotifyUrl(config.NotifyUrl);
-            requestData.SetReturnUrl(config.QuitUrl);
             requestData.SetBizModel(request);
 
             return client.SdkExecute(requestData);
