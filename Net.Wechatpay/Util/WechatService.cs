@@ -40,13 +40,13 @@ namespace Net.Wechatpay
         /// <returns></returns>
         public static async Task<WechatpayData> ExecuteAsync(WechatpayData inputObj, WechatpayConfig config, string url, bool isUseCert = false, int timeout = 6)
         {
-            inputObj.SetValue("appid", config.APPID);//公众账号ID
-            inputObj.SetValue("mch_id", config.MCHID);//商户号
+            inputObj.SetValue("appid", config.AppId);//公众账号ID
+            inputObj.SetValue("mch_id", config.MchId);//商户号
             inputObj.SetValue("nonce_str", GenerateNonceStr());//随机字符串
             inputObj.SetValue("sign_type", config.SignType);//签名类型
             inputObj.SetValue("sign", inputObj.MakeSign(config.SignType, config.SignKey));//签名
 
-            string response = await HttpService.Post(inputObj.ToXml(), url, isUseCert, timeout, config.SSLCERT_PATH, config.SSLCERT_PASSWORD);
+            string response = await HttpService.Post(inputObj.ToXml(), url, isUseCert, timeout, config.CertPath, config.CertPassword);
 
             var result = new WechatpayData();
             result.FromXml(response);
@@ -66,8 +66,8 @@ namespace Net.Wechatpay
         public static WechatpayData GetAppData(WechatpayConfig config, object prepay_id)
         {
             var data = new WechatpayData();
-            data.SetValue(WechatConstants.APPID, config.APPID);
-            data.SetValue(WechatConstants.PARTNERID, config.MCHID);
+            data.SetValue(WechatConstants.APPID, config.AppId);
+            data.SetValue(WechatConstants.PARTNERID, config.MchId);
             data.SetValue(WechatConstants.PREPAYID, prepay_id);
             data.SetValue(WechatConstants.PACKAGE, "Sign=WXPay");
             data.SetValue(WechatConstants.NONCESTR, WechatService.GenerateNonceStr());
@@ -84,7 +84,7 @@ namespace Net.Wechatpay
         public static string GenerateOutTradeNo(WechatpayConfig config)
         {
             var ran = new Random();
-            return string.Format("{0}{1}{2}", config.MCHID, DateTime.Now.ToString("yyyyMMddHHmmss"), ran.Next(999));
+            return string.Format("{0}{1}{2}", config.MchId, DateTime.Now.ToString("yyyyMMddHHmmss"), ran.Next(999));
         }
 
         /// <summary>

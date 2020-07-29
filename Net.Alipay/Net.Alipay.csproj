@@ -13,7 +13,7 @@
 5、交易关闭接口
 6、交易退款查询接口
 7、支付成功回调</Description>
-    <Version>1.0.3</Version>
+    <Version>1.0.7</Version>
   </PropertyGroup>
 
   <ItemGroup>

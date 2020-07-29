@@ -9,24 +9,6 @@ namespace Net.Wechatpay
     /// </summary>
     public class WechatpayConfig
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        public WechatpayConfig()
-        {
-
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public WechatpayConfig(string appid, string mchid, string key)
-        {
-            APPID = appid;
-            MCHID = mchid;
-            SignKey = key;
-        }
-
         //=======【基本信息设置】=====================================
         /* 微信公众号信息配置
         * APPID：绑定支付的APPID（必须配置）
@@ -37,12 +19,12 @@ namespace Net.Wechatpay
         /// <summary>
         /// 应用APPID
         /// </summary>
-        public string APPID { get; set; }
+        public string AppId { get; set; }
 
         /// <summary>
         /// 商户号
         /// </summary>
-        public string MCHID { get; set; }
+        public string MchId { get; set; }
 
         /// <summary>
         /// 用于签名的Key
@@ -57,10 +39,15 @@ namespace Net.Wechatpay
         //=======【证书路径设置】===================================== 
         /* 证书路径,注意应该填写绝对路径（仅退款、撤销订单时需要）
         */
-        public string SSLCERT_PATH { get; set; } = "Config/WechatCert/apiclient_cert.p12";
+        public string CertPath { get; set; } = "Config/WechatCert/apiclient_cert.p12";
         /// <summary>
         /// 
         /// </summary>
-        public string SSLCERT_PASSWORD { get; set; } = "";
+        public string CertPassword { get; set; } = "";
+
+        /// <summary>
+        /// 支付成功回调接口
+        /// </summary>
+        public string NotifyUrl { get; set; }
     }
 }
