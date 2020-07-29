@@ -139,7 +139,7 @@ namespace Wechatpay.AspNetCore
                 throw new Exception("退款申请接口中，缺少必填参数refund_fee！");
             }
 
-            var result = await WechatService.ExecuteAsync(request, config, WechatConstants.RefundOrderUrl);
+            var result = await WechatService.ExecuteAsync(request, config, WechatConstants.RefundOrderUrl, true);
             if (result.ReturnCode != WechatConstants.SUCCESS && result.ResultCode != WechatConstants.SUCCESS)
             {
                 throw new Exception(result.ReturnMsg);

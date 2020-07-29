@@ -39,7 +39,7 @@ namespace Wechatpay.AspNetCore
         //=======【证书路径设置】===================================== 
         /* 证书路径,注意应该填写绝对路径（仅退款、撤销订单时需要）
         */
-        public string CertPath { get; set; } = "Config/WechatCert/apiclient_cert.p12";
+        public string CertPath { get; set; } = "Config\\apiclient_cert.p12";
         /// <summary>
         /// 
         /// </summary>

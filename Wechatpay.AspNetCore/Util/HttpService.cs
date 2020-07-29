@@ -78,7 +78,8 @@ namespace Wechatpay.AspNetCore
                 //是否使用证书
                 if (isUseCert)
                 {
-                    X509Certificate2 cert = new X509Certificate2(certPath, certPassword);
+                    string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, certPath);
+                    X509Certificate2 cert = new X509Certificate2(path, certPassword);
                     request.ClientCertificates.Add(cert);
                 }
 
