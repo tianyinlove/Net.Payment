@@ -13,8 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Net.Alipay\Net.Alipay.csproj" />
-    <ProjectReference Include="..\Net.Wechatpay\Net.Wechatpay.csproj" />
+    <ProjectReference Include="..\Alipay.AspNetCore\Alipay.AspNetCore.csproj" />
+    <ProjectReference Include="..\Wechatpay.AspNetCore\Wechatpay.AspNetCore.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,6 +1,6 @@
-﻿using Net.Wechatpay;
-using Net.Wechatpay.Constants;
-using Net.Wechatpay.Request;
+﻿using Wechatpay.AspNetCore;
+using Wechatpay.AspNetCore.Constants;
+using Wechatpay.AspNetCore.Request;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;

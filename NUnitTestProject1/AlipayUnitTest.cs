@@ -1,5 +1,5 @@
-using Net.Alipay;
-using Net.Alipay.Domain;
+using Alipay.AspNetCore;
+using Alipay.AspNetCore.Domain;
 using NUnit.Framework;
 using System.Threading.Tasks;
 

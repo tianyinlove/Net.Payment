@@ -24,7 +24,7 @@ namespace Alipay.AspNetCore
         {
             var response = request.ToObject<AlipayNotifyResponse>();
             //签名校验
-            if (!AlipaySignature.RSACheckV1(request.GetValues(), config.AliPublicKey, response.Charset, response.SignType, false))
+            if (!AlipaySignature.RSACheckV1(request.GetValues(), config.AliPublicKey, response.Charset, response.SignType, config.KeyFromFile))
             {
                 throw new Exception("签名校验失败");
             }

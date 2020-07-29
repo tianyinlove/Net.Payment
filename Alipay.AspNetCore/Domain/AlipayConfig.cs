@@ -38,7 +38,7 @@ namespace Alipay.AspNetCore.Domain
         /// </summary>
         public string Charset { get; set; } = "utf-8";
         /// <summary>
-        /// 
+        /// 是否从文件加载支付宝公钥内容，如果为true，则PrivateKey/AliPublicKey为支付宝公钥文件路径
         /// </summary>
         public bool KeyFromFile { get; set; } = false;
         /// <summary>
