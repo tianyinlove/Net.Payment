@@ -17,6 +17,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Readme.md" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Readme.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="Portable.BouncyCastle" Version="1.8.6.7" />
   </ItemGroup>
