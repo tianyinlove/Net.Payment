@@ -107,7 +107,7 @@ namespace NUnitTestProject1
                 OutTradeNo = "202007297777",
                 TotalFee = 100,
                 RefundFee = 100,
-                OutRefundNo = WechatService.GenerateOutTradeNo(config)
+                OutRefundNo = HttpService.GenerateOutTradeNo(config)
             };
 
             var response = await WechatpayClient.RefundAsync(request, config);

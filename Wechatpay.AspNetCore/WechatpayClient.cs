@@ -79,12 +79,12 @@ namespace Wechatpay.AspNetCore
                 throw new Exception("缺少统一支付接口必填参数notify_url");
             }
 
-            var result = await WechatService.ExecuteAsync(request, config, WechatConstants.UnifiedOrderUrl);
+            var result = await HttpService.ExecuteAsync(request, config, WechatConstants.UnifiedOrderUrl);
             if (result.ReturnCode != WechatConstants.SUCCESS && result.ResultCode != WechatConstants.SUCCESS)
             {
                 throw new Exception(result.ReturnMsg);
             }
-            var data = WechatService.GetAppData(config, result.PrepayId);
+            var data = HttpService.GetAppData(config, result.PrepayId);
             result.Body = data.ToXml();
             return result;
         }
@@ -104,7 +104,7 @@ namespace Wechatpay.AspNetCore
                 throw new Exception("订单查询接口中，out_trade_no、transaction_id至少填一个！");
             }
 
-            var result = await WechatService.ExecuteAsync(request, config, WechatConstants.QeuryOrderUrl);
+            var result = await HttpService.ExecuteAsync(request, config, WechatConstants.QeuryOrderUrl);
             if (result.ReturnCode != WechatConstants.SUCCESS && result.ResultCode != WechatConstants.SUCCESS)
             {
                 throw new Exception(result.ReturnMsg);
@@ -139,7 +139,7 @@ namespace Wechatpay.AspNetCore
                 throw new Exception("退款申请接口中，缺少必填参数refund_fee！");
             }
 
-            var result = await WechatService.ExecuteAsync(request, config, WechatConstants.RefundOrderUrl, true);
+            var result = await HttpService.ExecuteAsync(request, config, WechatConstants.RefundOrderUrl, true);
             if (result.ReturnCode != WechatConstants.SUCCESS && result.ResultCode != WechatConstants.SUCCESS)
             {
                 throw new Exception(result.ReturnMsg);
@@ -165,7 +165,7 @@ namespace Wechatpay.AspNetCore
                 throw new Exception("退款查询接口中，out_refund_no、out_trade_no、transaction_id、refund_id四个参数必填一个！");
             }
 
-            var result = await WechatService.ExecuteAsync(request, config, WechatConstants.RefundOrderQueryUrl);
+            var result = await HttpService.ExecuteAsync(request, config, WechatConstants.RefundOrderQueryUrl);
             if (result.ReturnCode != WechatConstants.SUCCESS && result.ResultCode != WechatConstants.SUCCESS)
             {
                 throw new Exception(result.ReturnMsg);
@@ -188,7 +188,7 @@ namespace Wechatpay.AspNetCore
                 throw new Exception("关闭订单接口中，out_trade_no必填！");
             }
 
-            var result = await WechatService.ExecuteAsync(request, config, WechatConstants.CloseOrderUrl);
+            var result = await HttpService.ExecuteAsync(request, config, WechatConstants.CloseOrderUrl);
             if (result.ReturnCode != WechatConstants.SUCCESS && result.ResultCode != WechatConstants.SUCCESS)
             {
                 throw new Exception(result.ReturnMsg);
@@ -243,8 +243,8 @@ namespace Wechatpay.AspNetCore
                 throw new Exception("缺少统一支付接口必填参数notify_url");
             }
 
-            var result = await WechatService.ExecuteAsync(request, config, WechatConstants.UnifiedOrderUrl, false, timeOut);
-            var data = WechatService.GetAppData(config, result.GetValue("prepay_id"));
+            var result = await HttpService.ExecuteAsync(request, config, WechatConstants.UnifiedOrderUrl, false, timeOut);
+            var data = HttpService.GetAppData(config, result.GetValue("prepay_id"));
             result.SetValue("body", data.ToXml());
             return result;
         }
@@ -264,7 +264,7 @@ namespace Wechatpay.AspNetCore
                 throw new Exception("订单查询接口中，out_trade_no、transaction_id至少填一个！");
             }
 
-            return await WechatService.ExecuteAsync(request, config, WechatConstants.QeuryOrderUrl, false, timeOut);
+            return await HttpService.ExecuteAsync(request, config, WechatConstants.QeuryOrderUrl, false, timeOut);
         }
 
         /// <summary>
@@ -282,7 +282,7 @@ namespace Wechatpay.AspNetCore
                 throw new Exception("撤销订单API接口中，参数out_trade_no和transaction_id必须填写一个！");
             }
 
-            return await WechatService.ExecuteAsync(request, config, WechatConstants.ReverseOrderUrl, true, timeOut);
+            return await HttpService.ExecuteAsync(request, config, WechatConstants.ReverseOrderUrl, true, timeOut);
         }
 
         /// <summary>
@@ -312,7 +312,7 @@ namespace Wechatpay.AspNetCore
                 throw new Exception("退款申请接口中，缺少必填参数refund_fee！");
             }
 
-            return await WechatService.ExecuteAsync(request, config, WechatConstants.RefundOrderUrl, true, timeOut);
+            return await HttpService.ExecuteAsync(request, config, WechatConstants.RefundOrderUrl, true, timeOut);
         }
 
         /// <summary>
@@ -333,7 +333,7 @@ namespace Wechatpay.AspNetCore
                 throw new Exception("退款查询接口中，out_refund_no、out_trade_no、transaction_id、refund_id四个参数必填一个！");
             }
 
-            return await WechatService.ExecuteAsync(request, config, WechatConstants.RefundOrderQueryUrl, false, timeOut);
+            return await HttpService.ExecuteAsync(request, config, WechatConstants.RefundOrderQueryUrl, false, timeOut);
         }
 
         /// <summary>
@@ -351,7 +351,7 @@ namespace Wechatpay.AspNetCore
                 throw new Exception("关闭订单接口中，out_trade_no必填！");
             }
 
-            return await WechatService.ExecuteAsync(request, config, WechatConstants.CloseOrderUrl, false, timeOut);
+            return await HttpService.ExecuteAsync(request, config, WechatConstants.CloseOrderUrl, false, timeOut);
         }
 
         #endregion
