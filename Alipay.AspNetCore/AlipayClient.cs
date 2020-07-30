@@ -152,5 +152,27 @@ namespace Alipay.AspNetCore
             }
             return result;
         }
+
+        /// <summary>
+        /// 查询对账单下载地址
+        /// </summary>
+        /// <param name="request">提交给关闭订单API的参数</param>
+        /// <param name="config"></param>
+        /// <param name="accessToken">用户授权token</param>
+        /// <param name="timeOut">接口超时时间</param>
+        /// <returns>成功时返回，其他抛异常</returns>
+        public static async Task<AlipayDataDataserviceBillDownloadurlQueryResponse> DownloadBillAsync(AlipayDataDataserviceBillDownloadurlQueryModel request, AlipayConfig config, string accessToken = null, int timeOut = 6)
+        {
+            IAopClient client = new AopClient(AlipayConstants.GATEWAYURL, config.AppId, config.PrivateKey, config.Format, config.Version, config.SignType, config.AliPublicKey, config.Charset, config.KeyFromFile);
+            var requestData = new AlipayDataDataserviceBillDownloadurlQueryRequest();
+            requestData.SetBizModel(request);
+
+            var result = await client.ExecuteAsync(requestData, accessToken);
+            if (result.Code != AlipayConstants.SuccessCode)
+            {
+                throw new Exception(result.SubMsg);
+            }
+            return result;
+        }
     }
 }

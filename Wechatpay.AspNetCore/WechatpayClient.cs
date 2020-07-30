@@ -196,6 +196,32 @@ namespace Wechatpay.AspNetCore
             return result;
         }
 
+        /// <summary>
+        /// 下载对账单
+        /// </summary>
+        /// <param name="request">提交给下载对账单API的参数</param>
+        /// <param name="config"></param>
+        /// <param name="timeOut">接口超时时间</param>
+        /// <returns></returns>
+        public static async Task<WechatTradeDownloadResponse> DownloadBillAsync(WechatTradeDownloadRequest request, WechatpayConfig config, int timeOut = 6)
+        {
+            //检测必填参数
+            if (string.IsNullOrEmpty(request.BillDate))
+            {
+                throw new Exception("对账单接口中，缺少必填参数bill_date！");
+            }
+            var requestData = new WechatpayData();
+            requestData.FromObject(request);
+            var response = await HttpService.ExecuteAsync(requestData, config, WechatConstants.DownloadBillUrl, false, timeOut);//调用HTTP通信接口以提交数据到API
+            var result = response.ToObject<WechatTradeDownloadResponse>();
+            if (result.ReturnCode != WechatConstants.SUCCESS && result.ResultCode != WechatConstants.SUCCESS)
+            {
+                throw new Exception(result.ReturnMsg);
+            }
+            result.Body = response.ToXml();
+            return result;
+        }
+
         #endregion
 
         #region
@@ -352,6 +378,24 @@ namespace Wechatpay.AspNetCore
             }
 
             return await HttpService.ExecuteAsync(request, config, WechatConstants.CloseOrderUrl, false, timeOut);
+        }
+
+        /// <summary>
+        /// 下载对账单
+        /// </summary>
+        /// <param name="request">提交给下载对账单API的参数</param>
+        /// <param name="config"></param>
+        /// <param name="timeOut">接口超时时间</param>
+        /// <returns></returns>
+        public static async Task<WechatpayData> DownloadBillAsync(WechatpayData request, WechatpayConfig config, int timeOut = 6)
+        {
+            //检测必填参数
+            if (!request.IsSet("bill_date"))
+            {
+                throw new Exception("对账单接口中，缺少必填参数bill_date！");
+            }
+
+            return await HttpService.ExecuteAsync(request, config, WechatConstants.DownloadBillUrl, false, timeOut);//调用HTTP通信接口以提交数据到API
         }
 
         #endregion

@@ -11,6 +11,7 @@ namespace Wechatpay.AspNetCore.Request
     /// <summary>
     /// 退款查询
     /// </summary>
+    [Serializable]
     public class WechatRefundQueryRequest : IWechatRequest<WechatRefundQueryResponse>
     {
         /// <summary>

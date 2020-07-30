@@ -9,6 +9,7 @@ namespace Wechatpay.AspNetCore.Response
     /// <summary>
     /// 查询订单
     /// </summary>
+    [Serializable]
     public class WechatTradeQueryResponse : WechatResponse
     {
         /// <summary>

@@ -37,7 +37,7 @@ namespace Wechatpay.AspNetCore
         /// <param name="certPath"></param>
         /// <param name="certPassword"></param>
         /// <returns></returns>
-        static async Task<string> PostAsync(string xml, string url, bool isUseCert, int timeout, string certPath = "", string certPassword = "")
+        public static async Task<string> PostAsync(string xml, string url, bool isUseCert, int timeout, string certPath = "", string certPassword = "")
         {
             System.GC.Collect();//垃圾回收，回收没有正常关闭的http连接
 
@@ -125,7 +125,7 @@ namespace Wechatpay.AspNetCore
         /// </summary>
         /// <param name="url">请求的url地址</param>
         /// <returns>http GET成功后返回的数据，失败抛WebException异常</returns>
-        static async Task<string> GetAsync(string url)
+        public static async Task<string> GetAsync(string url)
         {
             System.GC.Collect();
             string result = "";
@@ -229,10 +229,21 @@ namespace Wechatpay.AspNetCore
             string response = await PostAsync(inputObj.ToXml(), url, isUseCert, timeout, config.CertPath, config.CertPassword);
 
             var result = new WechatpayData();
-            result.FromXml(response);
-
-            //验证签名,不通过会抛异常
-            result.CheckSign(config.SignType, config.SignKey);
+            //若接口调用失败会返回xml格式的结果
+            if (response.Substring(0, 5) == "<xml>")
+            {
+                result.FromXml(response);
+                //验证签名,不通过会抛异常
+                result.CheckSign(config.SignType, config.SignKey);
+            }
+            //接口调用成功则返回非xml格式的数据
+            else
+            {
+                result.SetValue("return_code", "SUCCESS");
+                result.SetValue("return_msg", "");
+                result.SetValue("result_code", "SUCCESS");
+                result.SetValue("body", response);
+            }
 
             return result;
         }

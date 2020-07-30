@@ -7,6 +7,7 @@ namespace Wechatpay.AspNetCore.Response
     /// <summary>
     /// 
     /// </summary>
+    [Serializable]
     public class WechatTradeCloseResponse : WechatResponse
     {
 

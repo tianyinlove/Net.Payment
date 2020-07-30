@@ -9,6 +9,7 @@ namespace Wechatpay.AspNetCore.Request
     /// <summary>
     /// 
     /// </summary>
+    [Serializable]
     public class WechatTradeCloseRequest : IWechatRequest<WechatTradeCloseResponse>
     {
         /// <summary>

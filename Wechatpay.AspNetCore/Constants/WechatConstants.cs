@@ -99,6 +99,10 @@ namespace Wechatpay.AspNetCore.Constants
         /// </summary>
         public const string CloseOrderUrl = "https://api.mch.weixin.qq.com/pay/closeorder";
 
+        /// <summary>
+        /// 下载账单接口
+        /// </summary>
+        public const string DownloadBillUrl = "https://api.mch.weixin.qq.com/pay/downloadbill";
         #endregion 接口地址
     }
 }
