@@ -53,9 +53,11 @@ namespace Alipay.AspNetCore
         /// </summary>
         /// <param name="request">提交给统一下单API的参数</param>
         /// <param name="config"></param>
+        /// <param name="accessToken">用户授权码</param>
+        /// <param name="method">请求方式,两个值可选：POST、GET;</param>
         /// <param name="timeOut">超时时间</param>
         /// <returns>成功时返回，其他抛异常</returns>
-        public static async Task<AlipayTradeWapPayResponse> CreateOrderAsync(AlipayTradeWapPayModel request, AlipayConfig config, int timeOut = 6)
+        public static async Task<AlipayTradeWapPayResponse> CreateOrderAsync(AlipayTradeWapPayModel request, AlipayConfig config, string accessToken = null, string method = "GET", int timeOut = 6)
         {
             IAopClient client = new AopClient(AlipayConstants.GATEWAYURL, config.AppId, config.PrivateKey, config.Format, config.Version, config.SignType, config.AliPublicKey, config.Charset, config.KeyFromFile);
             var requestData = new AlipayTradeWapPayRequest();
@@ -63,7 +65,7 @@ namespace Alipay.AspNetCore
             requestData.SetReturnUrl(config.QuitUrl);
             requestData.SetBizModel(request);
 
-            return await client.PageExecute(requestData);
+            return await client.PageExecute(requestData, accessToken, method);
         }
 
         /// <summary>
@@ -71,33 +73,33 @@ namespace Alipay.AspNetCore
         /// </summary>
         /// <param name="request">提交给查询订单API的参数</param>
         /// <param name="config"></param>
+        /// <param name="accessToken">用户授权token</param>
         /// <param name="timeOut">超时时间</param>
         /// <returns>成功时返回订单查询结果，其他抛异常</returns>
-        public static async Task<AlipayTradeQueryResponse> OrderQueryAsync(AlipayTradeQueryModel request, AlipayConfig config, int timeOut = 6)
+        public static async Task<AlipayTradeQueryResponse> OrderQueryAsync(AlipayTradeQueryModel request, AlipayConfig config, string accessToken = null, int timeOut = 6)
         {
             IAopClient client = new AopClient(AlipayConstants.GATEWAYURL, config.AppId, config.PrivateKey, config.Format, config.Version, config.SignType, config.AliPublicKey, config.Charset, config.KeyFromFile);
             var requestData = new AlipayTradeQueryRequest();
             requestData.SetBizModel(request);
 
-            return await client.ExecuteAsync(requestData);
+            return await client.ExecuteAsync(requestData, accessToken);
         }
 
         /// <summary>
         /// 申请退款
         /// </summary>
-        /// <param name="inputObj">提交给申请退款API的参数</param>
-        /// <param name="certPath"></param>
-        /// <param name="certPassword"></param>
+        /// <param name="request">提交给申请退款API的参数</param>
         /// <param name="config"></param>
+        /// <param name="accessToken">用户授权token</param>
         /// <param name="timeOut">超时时间</param>
         /// <returns>成功时返回接口调用结果，其他抛异常</returns>
-        public static async Task<AlipayTradeRefundResponse> RefundAsync(AlipayTradeRefundModel request, AlipayConfig config, int timeOut = 6)
+        public static async Task<AlipayTradeRefundResponse> RefundAsync(AlipayTradeRefundModel request, AlipayConfig config, string accessToken = null, int timeOut = 6)
         {
             IAopClient client = new AopClient(AlipayConstants.GATEWAYURL, config.AppId, config.PrivateKey, config.Format, config.Version, config.SignType, config.AliPublicKey, config.Charset, config.KeyFromFile);
             var requestData = new AlipayTradeRefundRequest();
             requestData.SetBizModel(request);
 
-            var result = await client.ExecuteAsync(requestData);
+            var result = await client.ExecuteAsync(requestData, accessToken);
             if (result.Code != AlipayConstants.SuccessCode)
             {
                 throw new Exception(result.SubMsg);
@@ -112,15 +114,16 @@ namespace Alipay.AspNetCore
         /// </summary>
         /// <param name="request">out_refund_no、out_trade_no、transaction_id、refund_id四个参数必填一个</param>
         /// <param name="config"></param>
+        /// <param name="accessToken">用户授权token</param>
         /// <param name="timeOut">接口超时时间</param>
         /// <returns>成功时返回，其他抛异常</returns>
-        public static async Task<AlipayTradeFastpayRefundQueryResponse> RefundQueryAsync(AlipayTradeFastpayRefundQueryModel request, AlipayConfig config, int timeOut = 6)
+        public static async Task<AlipayTradeFastpayRefundQueryResponse> RefundQueryAsync(AlipayTradeFastpayRefundQueryModel request, AlipayConfig config, string accessToken = null, int timeOut = 6)
         {
             IAopClient client = new AopClient(AlipayConstants.GATEWAYURL, config.AppId, config.PrivateKey, config.Format, config.Version, config.SignType, config.AliPublicKey, config.Charset, config.KeyFromFile);
             var requestData = new AlipayTradeFastpayRefundQueryRequest();
             requestData.SetBizModel(request);
 
-            var result = await client.ExecuteAsync(requestData);
+            var result = await client.ExecuteAsync(requestData, accessToken);
             if (result.Code != AlipayConstants.SuccessCode)
             {
                 throw new Exception(result.SubMsg);
@@ -133,15 +136,16 @@ namespace Alipay.AspNetCore
         /// </summary>
         /// <param name="request">提交给关闭订单API的参数</param>
         /// <param name="config"></param>
+        /// <param name="accessToken">用户授权token</param>
         /// <param name="timeOut">接口超时时间</param>
         /// <returns>成功时返回，其他抛异常</returns>
-        public static async Task<AlipayTradeCloseResponse> CloseOrderAsync(AlipayTradeCloseModel request, AlipayConfig config, int timeOut = 6)
+        public static async Task<AlipayTradeCloseResponse> CloseOrderAsync(AlipayTradeCloseModel request, AlipayConfig config, string accessToken = null, int timeOut = 6)
         {
             IAopClient client = new AopClient(AlipayConstants.GATEWAYURL, config.AppId, config.PrivateKey, config.Format, config.Version, config.SignType, config.AliPublicKey, config.Charset, config.KeyFromFile);
             var requestData = new AlipayTradeCloseRequest();
             requestData.SetBizModel(request);
 
-            var result = await client.ExecuteAsync(requestData);
+            var result = await client.ExecuteAsync(requestData, accessToken);
             if (result.Code != AlipayConstants.SuccessCode)
             {
                 throw new Exception(result.SubMsg);
