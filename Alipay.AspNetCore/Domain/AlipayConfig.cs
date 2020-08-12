@@ -10,6 +10,11 @@ namespace Alipay.AspNetCore.Domain
     public class AlipayConfig
     {
         /// <summary>
+        /// 是否上线
+        /// </summary>
+        public bool IsOnline { get; set; } = true;
+
+        /// <summary>
         /// 
         /// </summary>
         public string AppId { get; set; }

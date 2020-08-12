@@ -201,7 +201,7 @@ namespace Wechatpay.AspNetCore
         /// <param name="isUseCert"></param>
         /// <param name="timeout"></param>
         /// <returns></returns>
-        public static async Task<T> ExecuteAsync<T>(IWechatRequest<T> request, WechatpayConfig config, string url, bool isUseCert = false, int timeout = 6)
+        public static async Task<T> ExecuteAsync<T>(IWechatRequest<T> request, WechatAccountConfig config, string url, bool isUseCert = false, int timeout = 6)
         {
             var requestData = new WechatpayData();
             requestData.FromObject(request);
@@ -218,7 +218,7 @@ namespace Wechatpay.AspNetCore
         /// <param name="timeout"></param>
         /// <param name="url"></param>
         /// <returns></returns>
-        public static async Task<WechatpayData> ExecuteAsync(WechatpayData inputObj, WechatpayConfig config, string url, bool isUseCert = false, int timeout = 6)
+        public static async Task<WechatpayData> ExecuteAsync(WechatpayData inputObj, WechatAccountConfig config, string url, bool isUseCert = false, int timeout = 6)
         {
             inputObj.SetValue("appid", config.AppId);//公众账号ID
             inputObj.SetValue("mch_id", config.MchId);//商户号
@@ -233,6 +233,10 @@ namespace Wechatpay.AspNetCore
             if (response.Substring(0, 5) == "<xml>")
             {
                 result.FromXml(response);
+                if (result.GetValue("return_code").ToString() != WechatConstants.SUCCESS)
+                {
+                    throw new Exception(result.GetValue("return_msg").ToString());
+                }
                 //验证签名,不通过会抛异常
                 result.CheckSign(config.SignType, config.SignKey);
             }
@@ -249,21 +253,35 @@ namespace Wechatpay.AspNetCore
         }
 
         /// <summary>
-        /// 
+        /// 创建支付调起微信参数
         /// </summary>
         /// <param name="config"></param>
         /// <param name="prepay_id"></param>
+        /// <param name="tradeType"></param>
         /// <returns></returns>
-        public static WechatpayData GetAppData(WechatpayConfig config, object prepay_id)
+        public static WechatpayData GetAppData(WechatAccountConfig config, object prepay_id, string tradeType)
         {
             var data = new WechatpayData();
             data.SetValue(WechatConstants.APPID, config.AppId);
-            data.SetValue(WechatConstants.PARTNERID, config.MchId);
-            data.SetValue(WechatConstants.PREPAYID, prepay_id);
-            data.SetValue(WechatConstants.PACKAGE, "Sign=WXPay");
             data.SetValue(WechatConstants.NONCESTR, HttpService.GenerateNonceStr());
             data.SetValue(WechatConstants.TIMESTAMP, (int)(DateTime.Now.ToUniversalTime().Ticks / 10000000 - 62135596800));
-            data.SetValue(WechatConstants.SIGN, data.MakeSign(config.SignType, config.SignKey));
+            switch (tradeType)
+            {
+                case WechatConstants.APP:
+                    data.SetValue(WechatConstants.PARTNERID, config.MchId);
+                    data.SetValue(WechatConstants.PREPAYID, prepay_id);
+                    data.SetValue(WechatConstants.PACKAGE, "Sign=WXPay");
+                    data.SetValue(WechatConstants.SIGN, data.MakeSign(config.SignType, config.SignKey));
+                    break;
+                case WechatConstants.MWEB:
+                case WechatConstants.JSAPI:
+                    data.SetValue(WechatConstants.PACKAGE, "prepay_id=" + prepay_id);
+                    data.SetValue(WechatConstants.SIGNTYPE, config.SignType);
+                    data.SetValue(WechatConstants.PAYSIGN, data.MakeSign(config.SignType, config.SignKey));
+                    break;
+                case WechatConstants.NATIVE:
+                    break;
+            }
             return data;
         }
 
@@ -272,7 +290,7 @@ namespace Wechatpay.AspNetCore
         /// </summary>
         /// <param name="config"></param>
         /// <returns>订单号</returns>
-        public static string GenerateOutTradeNo(WechatpayConfig config)
+        public static string GenerateOutTradeNo(WechatAccountConfig config)
         {
             var ran = new Random();
             return string.Format("{0}{1}{2}", config.MchId, DateTime.Now.ToString("yyyyMMddHHmmss"), ran.Next(999));

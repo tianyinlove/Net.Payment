@@ -25,13 +25,7 @@ namespace NUnitTestProject1
         [Test]
         public async Task Test1()
         {
-            var config = new WechatpayConfig
-            {
-                NotifyUrl = "",
-                AppId = "",
-                MchId = "",
-                SignKey = ""
-            };
+            var config = new WechatpayConfig();
 
             var request = new WechatTradeAppPayRequest
             {
@@ -45,7 +39,7 @@ namespace NUnitTestProject1
                 NotifyUrl = config.NotifyUrl
             };
 
-            var response = await WechatpayClient.CreateOrderAsync(request, config);
+            var response = await WechatpayClient.CreateOrderAsync(request, config.AccountList[0]);
 
             if (string.IsNullOrEmpty(response.Body))
             {
@@ -63,20 +57,14 @@ namespace NUnitTestProject1
         [Test]
         public async Task Test2()
         {
-            var config = new WechatpayConfig
-            {
-                NotifyUrl = "",
-                AppId = "",
-                MchId = "",
-                SignKey = ""
-            };
+            var config = new WechatpayConfig();
 
             var request = new WechatTradeQueryRequest
             {
                 OutTradeNo = "202007297777"
             };
 
-            var response = await WechatpayClient.OrderQueryAsync(request, config);
+            var response = await WechatpayClient.OrderQueryAsync(request, config.AccountList[0]);
 
             if (string.IsNullOrEmpty(response.TransactionId))
             {
@@ -94,23 +82,17 @@ namespace NUnitTestProject1
         [Test]
         public async Task Test5()
         {
-            var config = new WechatpayConfig
-            {
-                NotifyUrl = "",
-                AppId = "",
-                MchId = "",
-                SignKey = ""
-            };
+            var config = new WechatpayConfig();
 
             var request = new WechatRefundRequest
             {
                 OutTradeNo = "202007297777",
                 TotalFee = 100,
                 RefundFee = 100,
-                OutRefundNo = HttpService.GenerateOutTradeNo(config)
+                OutRefundNo = HttpService.GenerateOutTradeNo(config.AccountList[0])
             };
 
-            var response = await WechatpayClient.RefundAsync(request, config);
+            var response = await WechatpayClient.RefundAsync(request, config.AccountList[0]);
 
             if (string.IsNullOrEmpty(response.TransactionId))
             {
@@ -128,20 +110,14 @@ namespace NUnitTestProject1
         [Test]
         public async Task Test6()
         {
-            var config = new WechatpayConfig
-            {
-                NotifyUrl = "",
-                AppId = "",
-                MchId = "",
-                SignKey = ""
-            };
+            var config = new WechatpayConfig();
 
             var request = new WechatTradeCloseRequest
             {
                 OutTradeNo = "202007297777"
             };
 
-            var response = await WechatpayClient.CloseOrderAsync(request, config);
+            var response = await WechatpayClient.CloseOrderAsync(request, config.AccountList[0]);
 
             if (string.IsNullOrEmpty(response.ReturnCode))
             {
@@ -163,14 +139,9 @@ namespace NUnitTestProject1
             var request = new WechatpayData();
             request.FromXml(data);
 
-            var config = new WechatpayConfig
-            {
-                NotifyUrl = "",
-                AppId = "",
-                MchId = "",
-                SignKey = ""
-            };
-            var response = WechatpayClient.Notify(request, config);
+            var config = new WechatpayConfig();
+
+            var response = WechatpayClient.Notify(request, config.AccountList[0]);
 
             if (string.IsNullOrEmpty(response.OutTradeNo))
             {

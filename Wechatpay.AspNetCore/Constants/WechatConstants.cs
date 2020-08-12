@@ -9,6 +9,7 @@ namespace Wechatpay.AspNetCore.Constants
     /// </summary>
     public class WechatConstants
     {
+        #region 加密类型sign_type
         /// <summary>
         /// 
         /// </summary>
@@ -17,11 +18,28 @@ namespace Wechatpay.AspNetCore.Constants
         /// 
         /// </summary>
         public const string HMAC_SHA256 = "HMAC-SHA256";
+        #endregion 加密类型sign_type
+
+        #region 交易类型trade_type
         /// <summary>
-        /// 
+        /// APP支付
         /// </summary>
         public const string APP = "APP";
+        /// <summary>
+        /// JSAPI支付/小程序支付
+        /// </summary>
+        public const string JSAPI = "JSAPI";
+        /// <summary>
+        /// H5支付
+        /// </summary>
+        public const string MWEB = "MWEB";
+        /// <summary>
+        /// NATIVE支付
+        /// </summary>
+        public const string NATIVE = "NATIVE";
+        #endregion 交易类型trade_type
 
+        #region 交易类型trade_state
         /// <summary>
         /// 
         /// </summary>
@@ -34,6 +52,7 @@ namespace Wechatpay.AspNetCore.Constants
         /// 
         /// </summary>
         public const string CLOSED = "CLOSED";
+        #endregion 交易状态trade_state
 
         #region APP端调起支付的参数列表
 
@@ -65,7 +84,14 @@ namespace Wechatpay.AspNetCore.Constants
         /// 签名
         /// </summary>
         public const string SIGN = "sign";
-
+        /// <summary>
+        /// 签名方式
+        /// </summary>
+        public const string SIGNTYPE = "signtype";
+        /// <summary>
+        /// 签名
+        /// </summary>
+        public const string PAYSIGN = "paysign";
         #endregion APP端调起支付的参数列表
 
         #region 接口地址

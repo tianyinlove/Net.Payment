@@ -5,9 +5,30 @@ using System.Text;
 namespace Wechatpay.AspNetCore
 {
     /// <summary>
-    /// 配置账号信息
+    /// 
     /// </summary>
     public class WechatpayConfig
+    {
+        /// <summary>
+        /// 是否上线
+        /// </summary>
+        public bool IsOnline { get; set; } = true;
+
+        /// <summary>
+        /// 支付成功回调接口
+        /// </summary>
+        public string NotifyUrl { get; set; }
+
+        /// <summary>
+        /// 账号配置
+        /// </summary>
+        public List<WechatAccountConfig> AccountList { get; set; }
+    }
+
+    /// <summary>
+    /// 配置账号信息
+    /// </summary>
+    public class WechatAccountConfig
     {
         //=======【基本信息设置】=====================================
         /* 微信公众号信息配置
@@ -44,10 +65,5 @@ namespace Wechatpay.AspNetCore
         /// 
         /// </summary>
         public string CertPassword { get; set; } = "";
-
-        /// <summary>
-        /// 支付成功回调接口
-        /// </summary>
-        public string NotifyUrl { get; set; }
     }
 }
