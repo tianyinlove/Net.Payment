@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Wechatpay.AspNetCore.Constants;
 
 namespace Wechatpay.AspNetCore
 {
@@ -30,6 +31,11 @@ namespace Wechatpay.AspNetCore
     /// </summary>
     public class WechatAccountConfig
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        public string TradeType { get; set; } = WechatConstants.APP;
+
         //=======【基本信息设置】=====================================
         /* 微信公众号信息配置
         * APPID：绑定支付的APPID（必须配置）
@@ -55,7 +61,7 @@ namespace Wechatpay.AspNetCore
         /// <summary>
         /// 签名类型，目前支持HMAC-SHA256和MD5，默认为MD5
         /// </summary>
-        public string SignType { get; set; } = "MD5";
+        public string SignType { get; set; } = WechatConstants.MD5;
 
         //=======【证书路径设置】===================================== 
         /* 证书路径,注意应该填写绝对路径（仅退款、撤销订单时需要）

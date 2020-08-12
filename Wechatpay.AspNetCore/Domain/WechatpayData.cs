@@ -214,7 +214,7 @@ namespace Wechatpay.AspNetCore
             //数据为空时不能转化为xml格式
             if (0 == m_values.Count)
             {
-                throw new Exception("WxPayData数据为空!");
+                return "";
             }
 
             string xml = "<xml>";
@@ -257,7 +257,7 @@ namespace Wechatpay.AspNetCore
                     continue;
                 }
 
-                if (pair.Key != "sign" && pair.Value.ToString() != "")
+                if (pair.Key != WechatConstants.SIGN && pair.Key != WechatConstants.PAYSIGN && pair.Value.ToString() != "")
                 {
                     buff += pair.Key + "=" + pair.Value + "&";
                 }
@@ -322,7 +322,7 @@ namespace Wechatpay.AspNetCore
             {
                 return CalcHMACSHA256Hash(str, signKey);
             }
-            else if (signType == WechatConstants.MD5)
+            else
             {
                 //MD5加密
                 var md5 = MD5.Create();
@@ -335,10 +335,6 @@ namespace Wechatpay.AspNetCore
                 //所有字符转为大写
                 return sb.ToString().ToUpper();
             }
-            else
-            {
-                throw new Exception("sign_type 不合法");
-            }
         }
 
         /**
@@ -349,18 +345,18 @@ namespace Wechatpay.AspNetCore
         public bool CheckSign(string signType, string signKey)
         {
             //如果没有设置签名，则跳过检测
-            if (!IsSet("sign"))
+            if (!IsSet(WechatConstants.SIGN))
             {
-                throw new Exception("签名存在但不合法!");
+                throw new Exception("签名不存在!");
             }
             //如果设置了签名但是签名为空，则抛异常
-            else if (GetValue("sign") == null || GetValue("sign").ToString() == "")
+            else if (GetValue(WechatConstants.SIGN) == null || GetValue(WechatConstants.SIGN).ToString() == "")
             {
                 throw new Exception("签名存在但不合法!");
             }
 
             //获取接收到的签名
-            string return_sign = GetValue("sign").ToString();
+            string return_sign = GetValue(WechatConstants.SIGN).ToString();
 
             //在本地计算新的签名
             string cal_sign = MakeSign(signType, signKey);
