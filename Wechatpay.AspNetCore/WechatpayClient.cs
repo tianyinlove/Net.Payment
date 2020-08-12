@@ -21,6 +21,10 @@ namespace Wechatpay.AspNetCore
         /// <returns></returns>
         public static WechatNotifyResponse Notify(WechatpayData request, WechatAccountConfig config)
         {
+            if (config == null || string.IsNullOrEmpty(config.AppId))
+            {
+                throw new Exception("收款账号不能为空");
+            }
             //验证签名,不通过会抛异常
             if (!request.CheckSign(config.SignType, config.SignKey))
             {

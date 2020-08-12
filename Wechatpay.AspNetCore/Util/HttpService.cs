@@ -220,6 +220,14 @@ namespace Wechatpay.AspNetCore
         /// <returns></returns>
         public static async Task<WechatpayData> ExecuteAsync(WechatpayData inputObj, WechatAccountConfig config, string url, bool isUseCert = false, int timeout = 6)
         {
+            if (config == null || string.IsNullOrEmpty(config.AppId) || string.IsNullOrEmpty(config.MchId))
+            {
+                throw new Exception("收款账号配置不能为空");
+            }
+            if (string.IsNullOrEmpty(config.SignKey))
+            {
+                throw new Exception("密钥配置不能为空");
+            }
             inputObj.SetValue("appid", config.AppId);//公众账号ID
             inputObj.SetValue("mch_id", config.MchId);//商户号
             inputObj.SetValue("nonce_str", GenerateNonceStr());//随机字符串
@@ -261,6 +269,14 @@ namespace Wechatpay.AspNetCore
         /// <returns></returns>
         public static WechatpayData GetAppData(WechatAccountConfig config, object prepay_id, string tradeType)
         {
+            if (config == null || string.IsNullOrEmpty(config.AppId) || string.IsNullOrEmpty(config.MchId))
+            {
+                throw new Exception("收款账号配置不能为空");
+            }
+            if (string.IsNullOrEmpty(config.SignKey))
+            {
+                throw new Exception("密钥配置不能为空");
+            }
             var data = new WechatpayData();
             data.SetValue(WechatConstants.APPID, config.AppId);
             data.SetValue(WechatConstants.NONCESTR, HttpService.GenerateNonceStr());
@@ -292,6 +308,10 @@ namespace Wechatpay.AspNetCore
         /// <returns>订单号</returns>
         public static string GenerateOutTradeNo(WechatAccountConfig config)
         {
+            if (config == null || string.IsNullOrEmpty(config.AppId) || string.IsNullOrEmpty(config.MchId))
+            {
+                throw new Exception("收款账号不能为空");
+            }
             var ran = new Random();
             return string.Format("{0}{1}{2}", config.MchId, DateTime.Now.ToString("yyyyMMddHHmmss"), ran.Next(999));
         }
