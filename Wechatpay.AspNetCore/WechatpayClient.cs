@@ -19,7 +19,7 @@ namespace Wechatpay.AspNetCore
         /// <param name="request"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public static WechatNotifyResponse Notify(WechatpayData request, WechatAccountConfig config)
+        public static WechatNotifyResponse Notify(WechatpayData request, WechatpayConfig config)
         {
             if (config == null || string.IsNullOrEmpty(config.AppId))
             {
@@ -47,7 +47,7 @@ namespace Wechatpay.AspNetCore
         /// <param name="config"></param>
         /// <param name="timeOut">超时时间</param>
         /// <returns>成功时返回，其他抛异常</returns>
-        public static async Task<WechatTradeAppPayResponse> CreateOrderAsync(WechatTradeAppPayRequest request, WechatAccountConfig config, int timeOut = 6)
+        public static async Task<WechatTradeAppPayResponse> CreateOrderAsync(WechatTradeAppPayRequest request, WechatpayConfig config, int timeOut = 6)
         {
             //检测必填参数
             if (string.IsNullOrEmpty(request.OutTradeNo))
@@ -100,7 +100,7 @@ namespace Wechatpay.AspNetCore
         /// <param name="config"></param>
         /// <param name="timeOut">超时时间</param>
         /// <returns>成功时返回订单查询结果，其他抛异常</returns>
-        public static async Task<WechatTradeQueryResponse> OrderQueryAsync(WechatTradeQueryRequest request, WechatAccountConfig config, int timeOut = 6)
+        public static async Task<WechatTradeQueryResponse> OrderQueryAsync(WechatTradeQueryRequest request, WechatpayConfig config, int timeOut = 6)
         {
             //检测必填参数
             if (string.IsNullOrEmpty(request.OutTradeNo) && string.IsNullOrEmpty(request.TransactionId))
@@ -123,7 +123,7 @@ namespace Wechatpay.AspNetCore
         /// <param name="config"></param>
         /// <param name="timeOut">超时时间</param>
         /// <returns>成功时返回接口调用结果，其他抛异常</returns>
-        public static async Task<WechatRefundResponse> RefundAsync(WechatRefundRequest request, WechatAccountConfig config, int timeOut = 6)
+        public static async Task<WechatRefundResponse> RefundAsync(WechatRefundRequest request, WechatpayConfig config, int timeOut = 6)
         {
             //检测必填参数
             if (string.IsNullOrEmpty(request.OutTradeNo) && string.IsNullOrEmpty(request.TransactionId))
@@ -160,7 +160,7 @@ namespace Wechatpay.AspNetCore
         /// <param name="config"></param>
         /// <param name="timeOut">接口超时时间</param>
         /// <returns>成功时返回，其他抛异常</returns>
-        public static async Task<WechatRefundQueryResponse> RefundQueryAsync(WechatRefundQueryRequest request, WechatAccountConfig config, int timeOut = 6)
+        public static async Task<WechatRefundQueryResponse> RefundQueryAsync(WechatRefundQueryRequest request, WechatpayConfig config, int timeOut = 6)
         {
             //检测必填参数
             if (string.IsNullOrEmpty(request.OutRefundNo) && string.IsNullOrEmpty(request.OutTradeNo) &&
@@ -184,7 +184,7 @@ namespace Wechatpay.AspNetCore
         /// <param name="config"></param>
         /// <param name="timeOut">接口超时时间</param>
         /// <returns>成功时返回，其他抛异常</returns>
-        public static async Task<WechatTradeCloseResponse> CloseOrderAsync(WechatTradeCloseRequest request, WechatAccountConfig config, int timeOut = 6)
+        public static async Task<WechatTradeCloseResponse> CloseOrderAsync(WechatTradeCloseRequest request, WechatpayConfig config, int timeOut = 6)
         {
             //检测必填参数
             if (string.IsNullOrEmpty(request.OutTradeNo))
@@ -207,7 +207,7 @@ namespace Wechatpay.AspNetCore
         /// <param name="config"></param>
         /// <param name="timeOut">接口超时时间</param>
         /// <returns></returns>
-        public static async Task<WechatTradeDownloadResponse> DownloadBillAsync(WechatTradeDownloadRequest request, WechatAccountConfig config, int timeOut = 6)
+        public static async Task<WechatTradeDownloadResponse> DownloadBillAsync(WechatTradeDownloadRequest request, WechatpayConfig config, int timeOut = 6)
         {
             //检测必填参数
             if (string.IsNullOrEmpty(request.BillDate))
@@ -237,7 +237,7 @@ namespace Wechatpay.AspNetCore
         /// <param name="config"></param>
         /// <param name="timeOut">超时时间</param>
         /// <returns>成功时返回，其他抛异常</returns>
-        public static async Task<WechatpayData> CreateOrderAsync(WechatpayData request, WechatAccountConfig config, int timeOut = 6)
+        public static async Task<WechatpayData> CreateOrderAsync(WechatpayData request, WechatpayConfig config, int timeOut = 6)
         {
             //检测必填参数
             if (!request.IsSet("out_trade_no"))
@@ -286,7 +286,7 @@ namespace Wechatpay.AspNetCore
         /// <param name="config"></param>
         /// <param name="timeOut">超时时间</param>
         /// <returns>成功时返回订单查询结果，其他抛异常</returns>
-        public static async Task<WechatpayData> OrderQueryAsync(WechatpayData request, WechatAccountConfig config, int timeOut = 6)
+        public static async Task<WechatpayData> OrderQueryAsync(WechatpayData request, WechatpayConfig config, int timeOut = 6)
         {
             //检测必填参数
             if (!request.IsSet("out_trade_no") && !request.IsSet("transaction_id"))
@@ -304,7 +304,7 @@ namespace Wechatpay.AspNetCore
         /// <param name="config"></param>
         /// <param name="timeOut">接口超时时间</param>
         /// <returns>成功时返回API调用结果，其他抛异常</returns>
-        public static async Task<WechatpayData> ReverseAsyns(WechatpayData request, WechatAccountConfig config, int timeOut = 6)
+        public static async Task<WechatpayData> ReverseAsyns(WechatpayData request, WechatpayConfig config, int timeOut = 6)
         {
             //检测必填参数
             if (!request.IsSet("out_trade_no") && !request.IsSet("transaction_id"))
@@ -322,7 +322,7 @@ namespace Wechatpay.AspNetCore
         /// <param name="config"></param>
         /// <param name="timeOut">超时时间</param>
         /// <returns>成功时返回接口调用结果，其他抛异常</returns>
-        public static async Task<WechatpayData> RefundAsync(WechatpayData request, WechatAccountConfig config, int timeOut = 6)
+        public static async Task<WechatpayData> RefundAsync(WechatpayData request, WechatpayConfig config, int timeOut = 6)
         {
             //检测必填参数
             if (!request.IsSet("out_trade_no") && !request.IsSet("transaction_id"))
@@ -354,7 +354,7 @@ namespace Wechatpay.AspNetCore
         /// <param name="config"></param>
         /// <param name="timeOut">接口超时时间</param>
         /// <returns>成功时返回，其他抛异常</returns>
-        public static async Task<WechatpayData> RefundQueryAsync(WechatpayData request, WechatAccountConfig config, int timeOut = 6)
+        public static async Task<WechatpayData> RefundQueryAsync(WechatpayData request, WechatpayConfig config, int timeOut = 6)
         {
             //检测必填参数
             if (!request.IsSet("out_refund_no") && !request.IsSet("out_trade_no") &&
@@ -373,7 +373,7 @@ namespace Wechatpay.AspNetCore
         /// <param name="config"></param>
         /// <param name="timeOut">接口超时时间</param>
         /// <returns>成功时返回，其他抛异常</returns>
-        public static async Task<WechatpayData> CloseOrderAsync(WechatpayData request, WechatAccountConfig config, int timeOut = 6)
+        public static async Task<WechatpayData> CloseOrderAsync(WechatpayData request, WechatpayConfig config, int timeOut = 6)
         {
             //检测必填参数
             if (!request.IsSet("out_trade_no"))
@@ -391,7 +391,7 @@ namespace Wechatpay.AspNetCore
         /// <param name="config"></param>
         /// <param name="timeOut">接口超时时间</param>
         /// <returns></returns>
-        public static async Task<WechatpayData> DownloadBillAsync(WechatpayData request, WechatAccountConfig config, int timeOut = 6)
+        public static async Task<WechatpayData> DownloadBillAsync(WechatpayData request, WechatpayConfig config, int timeOut = 6)
         {
             //检测必填参数
             if (!request.IsSet("bill_date"))

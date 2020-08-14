@@ -6,30 +6,9 @@ using Wechatpay.AspNetCore.Constants;
 namespace Wechatpay.AspNetCore
 {
     /// <summary>
-    /// 
-    /// </summary>
-    public class WechatpayConfig
-    {
-        /// <summary>
-        /// 是否上线
-        /// </summary>
-        public bool IsOnline { get; set; } = true;
-
-        /// <summary>
-        /// 支付成功回调接口
-        /// </summary>
-        public string NotifyUrl { get; set; }
-
-        /// <summary>
-        /// 账号配置
-        /// </summary>
-        public List<WechatAccountConfig> AccountList { get; set; }
-    }
-
-    /// <summary>
     /// 配置账号信息
     /// </summary>
-    public class WechatAccountConfig
+    public class WechatpayConfig
     {
         /// <summary>
         /// 

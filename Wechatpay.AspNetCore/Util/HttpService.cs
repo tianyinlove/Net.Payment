@@ -201,7 +201,7 @@ namespace Wechatpay.AspNetCore
         /// <param name="isUseCert"></param>
         /// <param name="timeout"></param>
         /// <returns></returns>
-        public static async Task<T> ExecuteAsync<T>(IWechatRequest<T> request, WechatAccountConfig config, string url, bool isUseCert = false, int timeout = 6)
+        public static async Task<T> ExecuteAsync<T>(IWechatRequest<T> request, WechatpayConfig config, string url, bool isUseCert = false, int timeout = 6)
         {
             var requestData = new WechatpayData();
             requestData.FromObject(request);
@@ -218,7 +218,7 @@ namespace Wechatpay.AspNetCore
         /// <param name="timeout"></param>
         /// <param name="url"></param>
         /// <returns></returns>
-        public static async Task<WechatpayData> ExecuteAsync(WechatpayData inputObj, WechatAccountConfig config, string url, bool isUseCert = false, int timeout = 6)
+        public static async Task<WechatpayData> ExecuteAsync(WechatpayData inputObj, WechatpayConfig config, string url, bool isUseCert = false, int timeout = 6)
         {
             if (config == null || string.IsNullOrEmpty(config.AppId) || string.IsNullOrEmpty(config.MchId))
             {
@@ -267,7 +267,7 @@ namespace Wechatpay.AspNetCore
         /// <param name="prepay_id"></param>
         /// <param name="tradeType"></param>
         /// <returns></returns>
-        public static WechatpayData GetAppData(WechatAccountConfig config, object prepay_id, string tradeType)
+        public static WechatpayData GetAppData(WechatpayConfig config, object prepay_id, string tradeType)
         {
             if (config == null || string.IsNullOrEmpty(config.AppId) || string.IsNullOrEmpty(config.MchId))
             {
@@ -306,7 +306,7 @@ namespace Wechatpay.AspNetCore
         /// </summary>
         /// <param name="config"></param>
         /// <returns>订单号</returns>
-        public static string GenerateOutTradeNo(WechatAccountConfig config)
+        public static string GenerateOutTradeNo(WechatpayConfig config)
         {
             if (config == null || string.IsNullOrEmpty(config.AppId) || string.IsNullOrEmpty(config.MchId))
             {

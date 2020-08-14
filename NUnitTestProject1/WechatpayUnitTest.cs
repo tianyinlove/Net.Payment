@@ -36,10 +36,10 @@ namespace NUnitTestProject1
                 TimeExpire = DateTime.Now.AddDays(15).ToString("yyyyMMddHHmmss"),
                 TradeType = WechatConstants.APP,
                 TimeStart = DateTime.Now.ToString("yyyyMMddHHmmss"),
-                NotifyUrl = config.NotifyUrl
+                NotifyUrl = ""
             };
 
-            var response = await WechatpayClient.CreateOrderAsync(request, config.AccountList[0]);
+            var response = await WechatpayClient.CreateOrderAsync(request, config);
 
             if (string.IsNullOrEmpty(response.Body))
             {
@@ -64,7 +64,7 @@ namespace NUnitTestProject1
                 OutTradeNo = "202007297777"
             };
 
-            var response = await WechatpayClient.OrderQueryAsync(request, config.AccountList[0]);
+            var response = await WechatpayClient.OrderQueryAsync(request, config);
 
             if (string.IsNullOrEmpty(response.TransactionId))
             {
@@ -89,10 +89,10 @@ namespace NUnitTestProject1
                 OutTradeNo = "202007297777",
                 TotalFee = 100,
                 RefundFee = 100,
-                OutRefundNo = HttpService.GenerateOutTradeNo(config.AccountList[0])
+                OutRefundNo = HttpService.GenerateOutTradeNo(config)
             };
 
-            var response = await WechatpayClient.RefundAsync(request, config.AccountList[0]);
+            var response = await WechatpayClient.RefundAsync(request, config);
 
             if (string.IsNullOrEmpty(response.TransactionId))
             {
@@ -117,7 +117,7 @@ namespace NUnitTestProject1
                 OutTradeNo = "202007297777"
             };
 
-            var response = await WechatpayClient.CloseOrderAsync(request, config.AccountList[0]);
+            var response = await WechatpayClient.CloseOrderAsync(request, config);
 
             if (string.IsNullOrEmpty(response.ReturnCode))
             {
@@ -141,7 +141,7 @@ namespace NUnitTestProject1
 
             var config = new WechatpayConfig();
 
-            var response = WechatpayClient.Notify(request, config.AccountList[0]);
+            var response = WechatpayClient.Notify(request, config);
 
             if (string.IsNullOrEmpty(response.OutTradeNo))
             {
