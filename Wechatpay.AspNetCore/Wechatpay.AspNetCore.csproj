@@ -11,7 +11,7 @@
 5、交易退款查询接口
 6、支付成功回调</Description>
     <Authors>Alex</Authors>
-    <Version>1.0.9</Version>
+    <Version>1.0.10</Version>
   </PropertyGroup>
 
   <ItemGroup>
