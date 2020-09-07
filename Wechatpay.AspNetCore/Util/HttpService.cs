@@ -213,10 +213,10 @@ namespace Wechatpay.AspNetCore
         /// 
         /// </summary>
         /// <param name="inputObj"></param>
-        /// <param name="certPath"></param>
-        /// <param name="certPassword"></param>
-        /// <param name="timeout"></param>
+        /// <param name="config"></param>
         /// <param name="url"></param>
+        /// <param name="isUseCert"></param>
+        /// <param name="timeout"></param>
         /// <returns></returns>
         public static async Task<WechatpayData> ExecuteAsync(WechatpayData inputObj, WechatpayConfig config, string url, bool isUseCert = false, int timeout = 6)
         {
