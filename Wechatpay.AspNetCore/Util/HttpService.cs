@@ -278,19 +278,22 @@ namespace Wechatpay.AspNetCore
                 throw new Exception("密钥配置不能为空");
             }
             var data = new WechatpayData();
-            data.SetValue(WechatConstants.APPID, config.AppId);
-            data.SetValue(WechatConstants.NONCESTR, HttpService.GenerateNonceStr());
-            data.SetValue(WechatConstants.TIMESTAMP, (int)(DateTime.Now.ToUniversalTime().Ticks / 10000000 - 62135596800));
             switch (tradeType)
             {
                 case WechatConstants.APP:
+                    data.SetValue(WechatConstants.APPID.ToLower(), config.AppId);
+                    data.SetValue(WechatConstants.NONCESTR.ToLower(), HttpService.GenerateNonceStr());
+                    data.SetValue(WechatConstants.TIMESTAMP.ToLower(), (int)(DateTime.Now.ToUniversalTime().Ticks / 10000000 - 62135596800));
                     data.SetValue(WechatConstants.PARTNERID, config.MchId);
                     data.SetValue(WechatConstants.PREPAYID, prepay_id);
-                    data.SetValue(WechatConstants.PACKAGE, "Sign=WXPay");
+                    data.SetValue(WechatConstants.PACKAGE.ToLower(), "Sign=WXPay");
                     data.SetValue(WechatConstants.SIGN, data.MakeSign(config.SignType, config.SignKey));
                     break;
                 case WechatConstants.MWEB:
                 case WechatConstants.JSAPI:
+                    data.SetValue(WechatConstants.APPID, config.AppId);
+                    data.SetValue(WechatConstants.NONCESTR, HttpService.GenerateNonceStr());
+                    data.SetValue(WechatConstants.TIMESTAMP, (int)(DateTime.Now.ToUniversalTime().Ticks / 10000000 - 62135596800));
                     data.SetValue(WechatConstants.PACKAGE, "prepay_id=" + prepay_id);
                     data.SetValue(WechatConstants.SIGNTYPE, config.SignType);
                     data.SetValue(WechatConstants.PAYSIGN, data.MakeSign(config.SignType, config.SignKey));

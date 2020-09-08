@@ -257,7 +257,7 @@ namespace Wechatpay.AspNetCore
                     continue;
                 }
 
-                if (pair.Key != WechatConstants.SIGN && pair.Key != WechatConstants.PAYSIGN && pair.Value.ToString() != "")
+                if (!string.Equals(pair.Key, WechatConstants.SIGN, StringComparison.OrdinalIgnoreCase) && !string.Equals(pair.Key, WechatConstants.PAYSIGN, StringComparison.OrdinalIgnoreCase) && pair.Value.ToString() != "")
                 {
                     buff += pair.Key + "=" + pair.Value + "&";
                 }

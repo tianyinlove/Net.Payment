@@ -59,7 +59,7 @@ namespace Wechatpay.AspNetCore.Constants
         /// <summary>
         /// 应用ID
         /// </summary>
-        public const string APPID = "appid";
+        public const string APPID = "appId";
         /// <summary>
         /// 商户号mch_id
         /// </summary>
@@ -75,11 +75,11 @@ namespace Wechatpay.AspNetCore.Constants
         /// <summary>
         /// 随机字符串
         /// </summary>
-        public const string NONCESTR = "noncestr";
+        public const string NONCESTR = "nonceStr";
         /// <summary>
         /// 时间戳
         /// </summary>
-        public const string TIMESTAMP = "timestamp";
+        public const string TIMESTAMP = "timeStamp";
         /// <summary>
         /// 签名
         /// </summary>
@@ -87,11 +87,11 @@ namespace Wechatpay.AspNetCore.Constants
         /// <summary>
         /// 签名方式
         /// </summary>
-        public const string SIGNTYPE = "signtype";
+        public const string SIGNTYPE = "signType";
         /// <summary>
         /// 签名
         /// </summary>
-        public const string PAYSIGN = "paysign";
+        public const string PAYSIGN = "paySign";
         #endregion APP端调起支付的参数列表
 
         #region 接口地址
