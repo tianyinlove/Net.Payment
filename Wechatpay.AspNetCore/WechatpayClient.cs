@@ -88,7 +88,7 @@ namespace Wechatpay.AspNetCore
             {
                 throw new Exception(result.ReturnMsg);
             }
-            var data = HttpService.GetAppData(config, result.PrepayId, request.TradeType);
+            var data = HttpService.GetAppData(config, result.PrepayId, request.TradeType, result.CodeUrl);
             result.Body = data.ToXml();
             return result;
         }
@@ -274,7 +274,7 @@ namespace Wechatpay.AspNetCore
             }
 
             var result = await HttpService.ExecuteAsync(request, config, WechatConstants.UnifiedOrderUrl, false, timeOut);
-            var data = HttpService.GetAppData(config, result.GetValue("prepay_id"), request.GetValue("trade_type").ToString());
+            var data = HttpService.GetAppData(config, result.GetValue("prepay_id"), request.GetValue("trade_type")?.ToString(), request.GetValue("code_url")?.ToString());
             result.SetValue("body", data.ToXml());
             return result;
         }

@@ -25,6 +25,12 @@ namespace Wechatpay.AspNetCore.Response
         [JsonProperty("trade_type")]
         public string TradeType { get; set; }
         /// <summary>
+        /// trade_type=NATIVE时有返回，此url用于生成支付二维码，然后提供给用户进行扫码支付。
+        /// </summary>
+        [XmlElement("code_url")]
+        [JsonProperty("code_url")]
+        public string CodeUrl { get; set; }
+        /// <summary>
         /// APP端调起支付的参数
         /// </summary>
         public string Body { get; set; }

@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alipay.AspNetCore", "Alipay
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wechatpay.AspNetCore", "Wechatpay.AspNetCore\Wechatpay.AspNetCore.csproj", "{84101277-FBFA-46BB-AFAB-8565ACC5BE6D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Applepay.AspNetCore", "Applepay.AspNetCore\Applepay.AspNetCore.csproj", "{6B083E28-AC5D-416E-8EB5-04C1B4FAC472}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Applepay.AspNetCore", "Applepay.AspNetCore\Applepay.AspNetCore.csproj", "{6B083E28-AC5D-416E-8EB5-04C1B4FAC472}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Web", "Test.Web\Test.Web.csproj", "{8F257037-18DA-41CE-BB5A-BEBD9A0FB5A5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{6B083E28-AC5D-416E-8EB5-04C1B4FAC472}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6B083E28-AC5D-416E-8EB5-04C1B4FAC472}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6B083E28-AC5D-416E-8EB5-04C1B4FAC472}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F257037-18DA-41CE-BB5A-BEBD9A0FB5A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F257037-18DA-41CE-BB5A-BEBD9A0FB5A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F257037-18DA-41CE-BB5A-BEBD9A0FB5A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F257037-18DA-41CE-BB5A-BEBD9A0FB5A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

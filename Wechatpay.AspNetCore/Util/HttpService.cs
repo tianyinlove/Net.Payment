@@ -266,8 +266,9 @@ namespace Wechatpay.AspNetCore
         /// <param name="config"></param>
         /// <param name="prepay_id"></param>
         /// <param name="tradeType"></param>
+        /// <param name="codeUrl"></param>
         /// <returns></returns>
-        public static WechatpayData GetAppData(WechatpayConfig config, object prepay_id, string tradeType)
+        public static WechatpayData GetAppData(WechatpayConfig config, object prepay_id, string tradeType, string codeUrl)
         {
             if (config == null || string.IsNullOrEmpty(config.AppId) || string.IsNullOrEmpty(config.MchId))
             {
@@ -299,6 +300,8 @@ namespace Wechatpay.AspNetCore
                     data.SetValue(WechatConstants.PAYSIGN, data.MakeSign(config.SignType, config.SignKey));
                     break;
                 case WechatConstants.NATIVE:
+                    //生成二维码
+                    data.SetValue(WechatConstants.APPID, codeUrl);
                     break;
             }
             return data;
