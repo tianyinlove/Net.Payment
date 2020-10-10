@@ -300,8 +300,7 @@ namespace Wechatpay.AspNetCore
                     data.SetValue(WechatConstants.PAYSIGN, data.MakeSign(config.SignType, config.SignKey));
                     break;
                 case WechatConstants.NATIVE:
-                    //生成二维码
-                    data.SetValue(WechatConstants.APPID, codeUrl);
+                    data.SetValue(WechatConstants.CODEURL, codeUrl);
                     break;
             }
             return data;

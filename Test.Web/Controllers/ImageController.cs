@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using QRCoder;
+using Wechatpay.AspNetCore;
+using Wechatpay.AspNetCore.Constants;
+using Wechatpay.AspNetCore.Request;
 
 namespace Test.Web.Controllers
 {
@@ -33,11 +36,32 @@ namespace Test.Web.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<IActionResult> GetImage(string url = "http://www.baidu.com")
+        public async Task<IActionResult> GetImage()
         {
+            var config = new WechatpayConfig
+            {
+                AppId = "wxefd7e95dd1ec11ae",
+                SignKey = "I2lgA4cnK75mHULNqAaoZ3o4SSHMAY48",
+                MchId = "1495057202"
+            };
+
+            var request = new WechatTradeAppPayRequest
+            {
+                TotalFee = 100,
+                OutTradeNo = "202007297777",
+                ProductId = "202007297777",
+                Body = "产品",
+                Detail = "产品",
+                TimeExpire = DateTime.Now.AddHours(2).ToString("yyyyMMddHHmmss"),
+                TradeType = WechatConstants.NATIVE,
+                TimeStart = DateTime.Now.ToString("yyyyMMddHHmmss"),
+                NotifyUrl = "http://mobiletest.emoney.cn"
+            };
+
+            var order = await WechatpayClient.CreateOrderAsync(request, config);
             using (var generator = new QRCodeGenerator())
             {
-                using (var codeData = generator.CreateQrCode(url, QRCodeGenerator.ECCLevel.M, true))
+                using (var codeData = generator.CreateQrCode(order.CodeUrl, QRCodeGenerator.ECCLevel.M, true))
                 {
                     using (var qrcode = new QRCode(codeData))
                     {

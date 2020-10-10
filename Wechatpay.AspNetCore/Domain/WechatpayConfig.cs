@@ -10,11 +10,6 @@ namespace Wechatpay.AspNetCore
     /// </summary>
     public class WechatpayConfig
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        public string TradeType { get; set; } = WechatConstants.APP;
-
         //=======【基本信息设置】=====================================
         /* 微信公众号信息配置
         * APPID：绑定支付的APPID（必须配置）

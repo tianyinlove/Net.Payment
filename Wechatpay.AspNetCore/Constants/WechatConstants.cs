@@ -55,7 +55,10 @@ namespace Wechatpay.AspNetCore.Constants
         #endregion 交易状态trade_state
 
         #region APP端调起支付的参数列表
-
+        /// <summary>
+        /// 微信二维码地址
+        /// </summary>
+        public const string CODEURL = "codeUrl";
         /// <summary>
         /// 应用ID
         /// </summary>
