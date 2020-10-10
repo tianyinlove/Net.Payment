@@ -9,9 +9,10 @@
 3、交易退款接口
 4、交易关闭接口
 5、交易退款查询接口
-6、支付成功回调</Description>
+6、支付成功回调
+7、增加二维码支付</Description>
     <Authors>Alex</Authors>
-    <Version>1.0.10</Version>
+    <Version>1.0.11</Version>
   </PropertyGroup>
 
   <ItemGroup>
