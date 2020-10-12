@@ -7,6 +7,9 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using Alipay.AspNetCore;
+using Alipay.AspNetCore.Domain;
+using Alipay.AspNetCore.Request;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using QRCoder;
@@ -28,7 +31,6 @@ namespace Test.Web.Controllers
         /// </summary>
         public ImageController()
         {
-
         }
 
         /// <summary>
@@ -36,7 +38,36 @@ namespace Test.Web.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<IActionResult> GetImage()
+        public async Task<IActionResult> Alipay()
+        {
+            var config = new AlipayConfig
+            {
+                NotifyUrl = "http://mobiletest.emoney.cn/mdata/payment/api/alipay/alipaynotity",
+                AppId = "2015072000178264",
+                PrivateKey = "MIIEowIBAAKCAQEA92h++oFzk59dB+Xjcn+QsXMcMFREsMq1CqBXd1G8l+5wjDKetmoCbXNU3beZtWL+6XuetfPa2tmOR42v1zJeKODid5+tvgBe0ecJvgmxmSQ3al7gAu2mMnwzY6jkhl8kMG9CCUUs5PTQXAeDc5oSoXzfX06xgbCf4D4NRlRwPU5Ff3QVqlZ1desEczubyuhE7dl0pf+/Y6FB1NMTvB1MEX6PQ0ygVqe2i32ugCT/Fq2yf1UNwU6VXqOmX14mF/ZKxhWLn5bW3PVtvQkZQqR1Wtr5pNYDJ91XoKLraeSzH8fbLuxMGfwgflskMGwhMrmt69wRa5+Gc/5TdtgdLH648QIDAQABAoIBADWi8eRdLDFU21ZbAHRSM4xE6FeR7VJmn9kt6ch0b+6AQuYiE0Z4tQ4FcuCebTRlwd3cbwwDUe8gOzhH/1coFEHIf1BvzbrjWasn63THpTkOIPVunCIGY4GOa5Wvh9uZxL67YBWiaZk5efJ5roXhYSihacu/w7vaDs8OpNIafDrN0CE7KKxwo21sxR6++CikPV3ecs1lepKuiGmxSfUlZQ0LIK2kf0nt5JxAkcCmofW5wfTEQ3jD1ogdPtnqenGHqLONPU9vJ/onGLle8zu4K6m1FsIDFmpY/G9CAUDFE/Mkue6jmTFnMzSdEfQyA4mLqiSryerppzkF1eLsShUpAAECgYEA/2JrP8OzE0O3N0sMT0/KwMPrMKlz94GnLAd+YPs3Rf6c5UUEJCBgOo7wSrssvbeTg2r9K9xh9ROTsl6sIL6yAsisaIIAAqDhoMjMwoFVNPiln7qxhSi2FviJMD5fFDdNj1T8BjwOSl3iZnpUAGlebjBbH0qIFAOt/sLC9TVESLECgYEA+AEnys8efC1MQpIzf6i60DvhR88is0RoTLeI0AsAEwC3U6MXPkImW4P0WDdE5Ju4UNX2ARU5nJ5PQEUj0PPAWV+cJg7zPG1kLmMWomH4DjAIXrAE6rpDYfMVZcljzlPaWVcZpTNBW2Q25JuAD5G7LremKRJTFY/KS+WhB6a9hEECgYEA9e9JaPaFFSA46D6VdCtbDZeefhYxX0C0RGpTAgHqkLVJUmDMRB4JjVrpfI4T3/9RR1VYyUxJ6UEZEsSo7j+2HYgyv9GxQNa9caDtzsHN1F0+4jtfiORTtntRYewuk8FOJ6GnsjlTabpPtHBJRLwz+9kFZ3TW5q9Ed/oG1SyevYECgYBYloESTt3C2aNt/C9tIGZqz5jvP6xTgNII5V53ghZqs0zJEW7SDGsLMZ1sjYGMb5ttNKCFToGf0mTYvlnG3+sLgb2TUq/MG/83GqoRIxGqb7ntqM540kQTjvNLwp5mK0nJs/UzL5XfAXMiQfGCnjnQvEUcUrFe+Ff4uHPG+eakgQKBgAdQ24pGFdyC2gkwKPLPrvslfiuBxgvpsOqo0Jic+cK+QsORemqcKHM6RgwTPZ3ooaaaupjbERMTc0ykVJJGMCdnTINUwvyb2vR3p2a0PXMFVS/2OrIdRaMlmLX5BGVjupecE5wk+lEMjRWHrti4FrE8/yNMZNsFrBPxQBUGS8wr",
+                AliPublicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxKydmUKMCWLIShH/t/67Rbn16ZrBNwANAJ6rdUGEB3cWUaLG4poXLZsd6B1roEYioLRGTerHFGfHzjsL0vzG1FSnBTRgBu/F1xqtSzvzh8P5qW9ObISwjiOA4ZfV63XL3WpTytR8lPyWYFUSLmMc2ofzAKUVVC4p5nMafJB306f21AXNS6//ulDnI4IhRl2kvBawOgBGpJ4kHJHm/qtZ0XDu5/+LiLm/Wvd2lBp1z3QsqTHLumR+w/4CeTH1R/YZXd3fUULqg/2lVEk9O8rIcYVtnMJ/oR/BRhQsCU5y3nvC3fPMOwVqlM8AUzrZvN7tjhxxdFPpyj/d0yTS9B8pwQIDAQAB"
+            };
+
+            var data = new AlipayTradePrecreateModel
+            {
+                Body = "产品",
+                Subject = "产品",
+                OutTradeNo = $"em_{DateTime.Now.ToString("yyyyMMddHHmmss")}",
+                TimeoutExpress = "15m",
+                TotalAmount = $"{10:0.##}"
+            };
+
+            var response = await AlipayClient.CreateOrderAsync(data, config);
+
+            return await GetImage(response.QrCode);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<IActionResult> Wechatpay()
         {
             var config = new WechatpayConfig
             {
@@ -48,20 +79,30 @@ namespace Test.Web.Controllers
             var request = new WechatTradeAppPayRequest
             {
                 TotalFee = 100,
-                OutTradeNo = "202007297777",
-                ProductId = "202007297777",
+                OutTradeNo = $"test_{DateTime.Now.ToString("yyyyMMddHHmmss")}",
+                ProductId = $"test_{DateTime.Now.ToString("yyyyMMddHHmmss")}",
                 Body = "产品",
                 Detail = "产品",
                 TimeExpire = DateTime.Now.AddHours(2).ToString("yyyyMMddHHmmss"),
                 TradeType = WechatConstants.NATIVE,
                 TimeStart = DateTime.Now.ToString("yyyyMMddHHmmss"),
-                NotifyUrl = "http://mobiletest.emoney.cn"
+                NotifyUrl = "http://mobiletest.emoney.cn/mdata/payment/api/wechat/wechatnotity"
             };
 
-            var order = await WechatpayClient.CreateOrderAsync(request, config);
+            var response = await WechatpayClient.CreateOrderAsync(request, config);
+            return await GetImage(response.CodeUrl);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="codeUrl"></param>
+        /// <returns></returns>
+        async Task<IActionResult> GetImage(string codeUrl)
+        {
             using (var generator = new QRCodeGenerator())
             {
-                using (var codeData = generator.CreateQrCode(order.CodeUrl, QRCodeGenerator.ECCLevel.M, true))
+                using (var codeData = generator.CreateQrCode(codeUrl, QRCodeGenerator.ECCLevel.M, true))
                 {
                     using (var qrcode = new QRCode(codeData))
                     {

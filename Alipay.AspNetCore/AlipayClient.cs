@@ -69,6 +69,24 @@ namespace Alipay.AspNetCore
         }
 
         /// <summary>
+        /// 预付统一下单
+        /// </summary>
+        /// <param name="request">提交给统一下单API的参数</param>
+        /// <param name="config"></param>
+        /// <param name="accessToken">用户授权码</param>
+        /// <param name="timeOut">超时时间</param>
+        /// <returns>成功时返回，其他抛异常</returns>
+        public static async Task<AlipayTradePrecreateResponse> CreateOrderAsync(AlipayTradePrecreateModel request, AlipayConfig config, string accessToken = null, int timeOut = 6)
+        {
+            IAopClient client = new AopClient(AlipayConstants.GATEWAYURL, config.AppId, config.PrivateKey, config.Format, config.Version, config.SignType, config.AliPublicKey, config.Charset, config.KeyFromFile);
+            var requestData = new AlipayTradePrecreateRequest();
+            requestData.SetNotifyUrl(config.NotifyUrl);
+            requestData.SetBizModel(request);
+
+            return await client.ExecuteAsync(requestData, accessToken);
+        }
+
+        /// <summary>
         /// 查询订单
         /// </summary>
         /// <param name="request">提交给查询订单API的参数</param>

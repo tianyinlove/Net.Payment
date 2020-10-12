@@ -78,5 +78,9 @@ namespace Alipay.AspNetCore
         /// 手机网站支付接口2.0
         /// </summary>
         public static string QUICK_WAP_WAY = "QUICK_WAP_WAY";
+        /// <summary>
+        /// 当面付快捷版
+        /// </summary>
+        public static string OFFLINE_PAYMENT = "OFFLINE_PAYMENT";
     }
 }
