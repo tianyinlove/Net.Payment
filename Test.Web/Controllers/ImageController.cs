@@ -12,6 +12,7 @@ using Alipay.AspNetCore.Domain;
 using Alipay.AspNetCore.Request;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using QRCoder;
 using Wechatpay.AspNetCore;
 using Wechatpay.AspNetCore.Constants;
@@ -26,11 +27,14 @@ namespace Test.Web.Controllers
     [ApiController]
     public class ImageController : ControllerBase
     {
+        private IMemoryCache _memoryCache;
+
         /// <summary>
         /// 
         /// </summary>
-        public ImageController()
+        public ImageController(IMemoryCache memoryCache)
         {
+            _memoryCache = memoryCache;
         }
 
         /// <summary>
@@ -58,8 +62,8 @@ namespace Test.Web.Controllers
             };
 
             var response = await AlipayClient.CreateOrderAsync(data, config);
-
-            return await GetImage(response.QrCode);
+            var ms = Convert.FromBase64String((await GetImage(response.QrCode)).Replace("data:image/jpeg;base64,", ""));
+            return File(ms, "image/png");
         }
 
         /// <summary>
@@ -90,7 +94,8 @@ namespace Test.Web.Controllers
             };
 
             var response = await WechatpayClient.CreateOrderAsync(request, config);
-            return await GetImage(response.CodeUrl);
+            var ms = Convert.FromBase64String((await GetImage(response.CodeUrl)).Replace("data:image/jpeg;base64,", ""));
+            return File(ms, "image/png");
         }
 
         /// <summary>
@@ -98,7 +103,8 @@ namespace Test.Web.Controllers
         /// </summary>
         /// <param name="codeUrl"></param>
         /// <returns></returns>
-        async Task<IActionResult> GetImage(string codeUrl)
+        [HttpGet]
+        public async Task<string> GetImage(string codeUrl)
         {
             using (var generator = new QRCodeGenerator())
             {
@@ -112,7 +118,7 @@ namespace Test.Web.Controllers
                             using (var ms = new MemoryStream())
                             {
                                 bitmap.Save(ms, ImageFormat.Jpeg);
-                                return File(ms.GetBuffer(), "image/jpeg");
+                                return "data:image/jpeg;base64," + Convert.ToBase64String(ms.GetBuffer());
                             }
                         }
                     }
@@ -126,11 +132,21 @@ namespace Test.Web.Controllers
         /// <returns></returns>
         async Task<Bitmap> GetIcon()
         {
-            var iconUrl = "https://ms.emoney.cn/images/booking/ioc/20170904/zlb_s.png";
-            var client = new WebClient();
-            client.Proxy = null;
-            var data = await client.OpenReadTaskAsync(iconUrl);
-            return new Bitmap(data);
+            var cacheKey = "icon:image:data";
+            var result = _memoryCache.Get<byte[]>(cacheKey);
+            if (result == null)
+            {
+                var iconUrl = "https://ms.emoney.cn/images/booking/ioc/20170904/zlb_s.png";
+                var client = new WebClient();
+                client.Proxy = null;
+                result = await client.DownloadDataTaskAsync(iconUrl);
+                _memoryCache.Set(cacheKey, result, TimeSpan.FromDays(1));
+            }
+
+            using (var ms = new MemoryStream(result))
+            {
+                return new Bitmap(ms);
+            }
         }
     }
 }
