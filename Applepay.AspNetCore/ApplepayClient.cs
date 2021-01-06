@@ -48,7 +48,7 @@ namespace Applepay.AspNetCore
             {
                 throw new Exception("苹果支付订单无效");
             }
-            return result.Receipt.InApp.FirstOrDefault();
+            return result.Receipt.InApp.LastOrDefault();
         }
 
         /// <summary>
