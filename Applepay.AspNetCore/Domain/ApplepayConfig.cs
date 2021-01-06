@@ -15,6 +15,11 @@ namespace Applepay.AspNetCore.Domain
         public bool IsOnline { get; set; } = true;
 
         /// <summary>
+        /// IOS应用标识
+        /// </summary>
+        public string BundleId { get; set; } = "com.diyicaijing.myAppVideo";
+
+        /// <summary>
         /// 用于签名的Key
         /// </summary>
         public string SignKey { get; set; }

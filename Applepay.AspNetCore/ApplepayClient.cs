@@ -44,7 +44,7 @@ namespace Applepay.AspNetCore
             {
                 throw new Exception("苹果支付凭证验证失败");
             }
-            if (result.Receipt == null || result.Receipt.InApp == null || result.Receipt.InApp.Count <= 0)
+            if (result.Receipt == null || result.Receipt.BundleId != config.BundleId || result.Receipt.InApp == null || result.Receipt.InApp.Count <= 0)
             {
                 throw new Exception("苹果支付订单无效");
             }
