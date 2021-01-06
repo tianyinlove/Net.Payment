@@ -7,6 +7,7 @@ using Applepay.AspNetCore.Domain;
 using Applepay.AspNetCore.Request;
 using Applepay.AspNetCore.Response;
 using Applepay.AspNetCore.Util;
+using System.Collections.Generic;
 
 namespace Applepay.AspNetCore
 {
@@ -21,7 +22,7 @@ namespace Applepay.AspNetCore
         /// <param name="request"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public static async Task<AppleInApp> Notify(ApplepayNotifyRequest request, ApplepayConfig config, int timeOut = 6)
+        public static async Task<List<AppleInApp>> Notify(ApplepayNotifyRequest request, ApplepayConfig config, int timeOut = 6)
         {
             var checkData = new ApplepayData();
             checkData.FromObject(request);
@@ -48,7 +49,7 @@ namespace Applepay.AspNetCore
             {
                 throw new Exception("苹果支付订单无效");
             }
-            return result.Receipt.InApp.LastOrDefault();
+            return result.Receipt.InApp;
         }
 
         /// <summary>
