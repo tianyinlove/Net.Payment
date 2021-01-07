@@ -12,7 +12,11 @@
 6、交易退款查询接口
 7、支付成功回调</Description>
     <Authors>Alex</Authors>
-    <Version>1.0.6</Version>
+    <Version>1.0.7</Version>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>E:\project\develop\Alex\Net.Payment\Alipay.AspNetCore\Alipay.AspNetCore.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

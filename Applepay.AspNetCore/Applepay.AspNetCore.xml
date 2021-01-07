@@ -1,0 +1,458 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Applepay.AspNetCore</name>
+    </assembly>
+    <members>
+        <member name="T:Applepay.AspNetCore.ApplepayClient">
+            <summary>
+            苹果支付
+            </summary>
+        </member>
+        <member name="M:Applepay.AspNetCore.ApplepayClient.Notify(Applepay.AspNetCore.Request.ApplepayNotifyRequest,Applepay.AspNetCore.Domain.ApplepayConfig,System.Int32)">
+            <summary>
+            支付成功回调
+            </summary>
+            <param name="request"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Applepay.AspNetCore.ApplepayClient.CreateOrder(Applepay.AspNetCore.Request.AppleTradeAppPayRequest,Applepay.AspNetCore.Domain.ApplepayConfig)">
+            <summary>
+            
+            </summary>
+            <param name="request"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Applepay.AspNetCore.Constants.AppleConstants">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Applepay.AspNetCore.Constants.AppleConstants.SUCCESS">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Applepay.AspNetCore.Constants.AppleConstants.SandboxVerifyReceipt">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Applepay.AspNetCore.Constants.AppleConstants.VerifyReceipt">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Applepay.AspNetCore.Domain.ApplepayConfig">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Applepay.AspNetCore.Domain.ApplepayConfig.IsOnline">
+            <summary>
+            是否上线
+            </summary>
+        </member>
+        <member name="P:Applepay.AspNetCore.Domain.ApplepayConfig.BundleId">
+            <summary>
+            IOS应用标识
+            </summary>
+        </member>
+        <member name="P:Applepay.AspNetCore.Domain.ApplepayConfig.SignKey">
+            <summary>
+            用于签名的Key
+            </summary>
+        </member>
+        <member name="P:Applepay.AspNetCore.Domain.ApplepayConfig.SignType">
+            <summary>
+            签名类型，目前支持HMAC-SHA256和MD5，默认为MD5
+            </summary>
+        </member>
+        <member name="P:Applepay.AspNetCore.Domain.ApplepayConfig.NotifyUrl">
+            <summary>
+            支付成功回调接口
+            </summary>
+        </member>
+        <member name="T:Applepay.AspNetCore.Domain.ApplepayData">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Applepay.AspNetCore.Domain.ApplepayData.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:Applepay.AspNetCore.Domain.ApplepayData.#ctor(System.Collections.Generic.IComparer{System.String})">
+            <summary>
+            构造函数
+            </summary>
+            <param name="comparer">排序策略</param>
+        </member>
+        <member name="M:Applepay.AspNetCore.Domain.ApplepayData.FromObject(System.Object)">
+            <summary>
+            将数据转成网关数据
+            </summary>
+            <param name="res"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Applepay.AspNetCore.Domain.ApplepayData.GetElementValue(System.Object,System.Reflection.PropertyInfo)">
+            <summary>
+            获取对象的属性值
+            </summary>
+            <param name="res"></param>
+            <param name="pi"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Applepay.AspNetCore.Domain.ApplepayData.GetElementName(System.Reflection.PropertyInfo)">
+            <summary>
+            获取Xml属性名
+            </summary>
+            <param name="pi"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Applepay.AspNetCore.Domain.ApplepayData.FromUrl(System.String,System.Boolean)">
+            <summary>
+            将Url格式数据转换为网关数据
+            </summary>
+            <param name="url">url数据</param>
+            <param name="isUrlDecode">是否需要url解码</param>
+            <returns></returns>
+        </member>
+        <member name="M:Applepay.AspNetCore.Domain.ApplepayData.FromXml(System.String)">
+            <summary>
+            将Xml格式数据转换为网关数据
+            </summary>
+            <param name="xml">Xml数据</param>
+            <returns></returns>
+        </member>
+        <member name="M:Applepay.AspNetCore.Domain.ApplepayData.FromJson(System.String)">
+            <summary>
+            将Json格式数据转成网关数据
+            </summary>
+            <param name="json">json数据</param>
+            <returns></returns>
+        </member>
+        <member name="M:Applepay.AspNetCore.Domain.ApplepayData.Exists(System.String)">
+            <summary>
+            是否存在指定参数名
+            </summary>
+            <param name="key">参数名</param>
+            <returns></returns>
+        </member>
+        <member name="M:Applepay.AspNetCore.Domain.ApplepayData.Clear">
+            <summary>
+            清空网关数据
+            </summary>
+        </member>
+        <member name="M:Applepay.AspNetCore.Domain.ApplepayData.Remove(System.String)">
+            <summary>
+            移除指定参数
+            </summary>
+            <param name="key">参数名</param>
+            <returns></returns>
+        </member>
+        <member name="M:Applepay.AspNetCore.Domain.ApplepayData.SetValue(System.String,System.String)">
+            <summary>
+            添加参数
+            </summary>
+            <param name="key">参数名</param>
+            <param name="value">参数值</param>
+            <returns></returns>
+        </member>
+        <member name="M:Applepay.AspNetCore.Domain.ApplepayData.GetValue(System.String)">
+            <summary>
+            根据参数名获取参数值
+            </summary>
+            <param name="key">参数名</param>
+            <returns>参数值</returns>
+        </member>
+        <member name="M:Applepay.AspNetCore.Domain.ApplepayData.ToObject``1">
+            <summary>
+            将网关参数转为类型
+            </summary>
+            <typeparam name="T">类型</typeparam>
+            <param name="stringCase">字符串策略</param>
+            <returns></returns>
+        </member>
+        <member name="M:Applepay.AspNetCore.Domain.ApplepayData.ToJson">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Applepay.AspNetCore.Domain.ApplepayData.ToXml">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Applepay.AspNetCore.Domain.ApplepayData.ToUrl">
+            @Dictionary格式转化成url参数格式
+            @ return url格式串, 该串不包含sign字段值
+        </member>
+        <member name="M:Applepay.AspNetCore.Domain.ApplepayData.GetValues">
+            <summary>
+            获取Dictionary
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Applepay.AspNetCore.Domain.ApplepayData.MakeSign(System.String,System.String)">
+            @生成签名，详见签名生成算法
+            @return 签名, sign字段不参加签名
+        </member>
+        <member name="M:Applepay.AspNetCore.Domain.ApplepayData.CheckSign(System.String,System.String)">
+            
+            检测签名是否正确
+            正确返回true，错误抛异常
+        </member>
+        <member name="T:Applepay.AspNetCore.Request.ApplepayNotifyRequest">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Applepay.AspNetCore.Request.ApplepayNotifyRequest.OutTradeNo">
+            <summary>
+            订单号
+            </summary>
+        </member>
+        <member name="P:Applepay.AspNetCore.Request.ApplepayNotifyRequest.Sign">
+            <summary>
+            加密串
+            </summary>
+        </member>
+        <member name="P:Applepay.AspNetCore.Request.ApplepayNotifyRequest.AppleReceipt">
+            <summary>
+            苹果内购的验证收据
+            </summary>
+        </member>
+        <member name="T:Applepay.AspNetCore.Request.AppleTradeAppPayRequest">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Applepay.AspNetCore.Request.AppleTradeAppPayRequest.OutTradeNo">
+            <summary>
+            支付订单号
+            </summary>
+        </member>
+        <member name="P:Applepay.AspNetCore.Request.AppleTradeAppPayRequest.ProductId">
+            <summary>
+            产品ID
+            </summary>
+        </member>
+        <member name="T:Applepay.AspNetCore.Request.IApplepayRequest`1">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:Applepay.AspNetCore.Response.ApplepayNotifyResponse">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Applepay.AspNetCore.Response.ApplepayNotifyResponse.Status">
+            <summary>
+            交易状态
+            </summary>
+        </member>
+        <member name="P:Applepay.AspNetCore.Response.ApplepayNotifyResponse.Environment">
+            <summary>
+            收据生成的环境。 可能的值： Sandbox, Production
+            </summary>
+        </member>
+        <member name="P:Applepay.AspNetCore.Response.ApplepayNotifyResponse.Receipt">
+            <summary>
+            发送用于验证的收据的JSON表示形式。
+            </summary>
+        </member>
+        <member name="T:Applepay.AspNetCore.Response.AppleReceipt">
+            <summary>
+            发送用于验证的收据的JSON表示形式。
+            </summary>
+        </member>
+        <member name="P:Applepay.AspNetCore.Response.AppleReceipt.ApplicationVersion">
+            <summary>
+            应用程序的版本号。该应用程序的版本号对应于（在iOS中）或（在macOS中）中的值。在生产中，此值为基于的设备上应用程序的当前版本。在沙盒中，该值始终为。CFBundleVersionCFBundleShortVersionStringInfo.plistreceipt_creation_date_ms"1.0"
+            </summary>
+        </member>
+        <member name="P:Applepay.AspNetCore.Response.AppleReceipt.BundleId">
+            <summary>
+            收据所属应用的捆绑标识符。您在App Store Connect上提供此字符串。这相当于价值中的应用程序的文件。CFBundleIdentifierInfo.plist
+            </summary>
+        </member>
+        <member name="P:Applepay.AspNetCore.Response.AppleReceipt.InApp">
+            <summary>
+            包含所有应用内购买交易的应用内购买收据字段的数组。
+            </summary>
+        </member>
+        <member name="P:Applepay.AspNetCore.Response.AppleReceipt.ReceiptType">
+            <summary>
+            生成的收据类型。该值对应于购买应用程序或VPP的环境。
+            可能的值： Production, ProductionVPP, ProductionSandbox, ProductionVPPSandbox
+            </summary>
+        </member>
+        <member name="T:Applepay.AspNetCore.Response.AppleInApp">
+            <summary>
+            包含所有应用内购买交易的数组。这不包括已被您的应用标记为完成的消耗品交易。仅针对包含自动续订的收据返回。
+            </summary>
+        </member>
+        <member name="P:Applepay.AspNetCore.Response.AppleInApp.CancellationDate">
+            <summary>
+            Apple客户支持取消交易的时间，其日期时间格式类似于ISO8601。此字段仅用于退款交易。
+            </summary>
+        </member>
+        <member name="P:Applepay.AspNetCore.Response.AppleInApp.CancellationDateMs">
+            <summary>
+            Apple客户支持取消交易的时间，或者自动更新的订阅计划的升级时间（以UNIX纪元时间格式），以毫秒为单位。此字段仅适用于退款交易。使用此时间格式来处理日期。请参阅以获取更多信息。cancellation_date_ms
+            </summary>
+        </member>
+        <member name="P:Applepay.AspNetCore.Response.AppleInApp.CancellationDatePst">
+            <summary>
+            Apple客户支持取消交易的时间（太平洋时间）。此字段仅适用于退款交易。
+            </summary>
+        </member>
+        <member name="P:Applepay.AspNetCore.Response.AppleInApp.CancellationReason">
+            <summary>
+            交易退款的原因。当客户取消交易时，App Store会给他们退款并为此密钥提供价值。值“1”表示客户由于您的应用程序中存在实际或可感知的问题而取消了交易。值“0”表示交易因其他原因被取消；例如，如果客户意外购买。
+            可能的值： 1, 0
+            </summary>
+        </member>
+        <member name="P:Applepay.AspNetCore.Response.AppleInApp.ExpiresDate">
+            <summary>
+            订阅到期的时间或续订的时间，其日期时间格式类似于ISO 8601。
+            </summary>
+        </member>
+        <member name="P:Applepay.AspNetCore.Response.AppleInApp.ExpiresDateMs">
+            <summary>
+            订阅到期的时间或续订的时间（以UNIX纪元时间格式），以毫秒为单位。使用此时间格式来处理日期。请参阅以获取更多信息。expires_date_ms
+            </summary>
+        </member>
+        <member name="P:Applepay.AspNetCore.Response.AppleInApp.ExpiresDatePst">
+            <summary>
+            订阅到期的时间或续订的时间，在太平洋时区。
+            </summary>
+        </member>
+        <member name="P:Applepay.AspNetCore.Response.AppleInApp.OriginalPurchaseDate">
+            <summary>
+            原始应用购买时间，格式类似于ISO 8601。
+            </summary>
+        </member>
+        <member name="P:Applepay.AspNetCore.Response.AppleInApp.OriginalPurchaseDateMs">
+            <summary>
+            原始应用购买时间（以UNIX纪元时间格式），以毫秒为单位。使用此时间格式来处理日期。对于自动续订的订阅，此值指示订阅的首次购买日期。原始购买日期适用于所有产品类型，并且在相同商品ID的所有交易中都保持不变。该值对应于StoreKit中原始交易的属性。transactionDate
+            </summary>
+        </member>
+        <member name="P:Applepay.AspNetCore.Response.AppleInApp.OriginalPurchaseDatePst">
+            <summary>
+            原始应用购买时间（太平洋时间）。
+            </summary>
+        </member>
+        <member name="P:Applepay.AspNetCore.Response.AppleInApp.OriginalTransactionId">
+            <summary>
+            原始购买的交易标识符。请参阅以获取更多信息。original_transaction_id
+            </summary>
+        </member>
+        <member name="P:Applepay.AspNetCore.Response.AppleInApp.ProductId">
+            <summary>
+            购买产品的唯一标识符。您在App Store Connect中创建产品时提供此值，它对应于交易的付款属性中存储的对象的属性。productIdentifierSKPayment
+            </summary>
+        </member>
+        <member name="P:Applepay.AspNetCore.Response.AppleInApp.PurchaseDate">
+            <summary>
+            原始应用购买时间，格式类似于ISO 8601。
+            </summary>
+        </member>
+        <member name="P:Applepay.AspNetCore.Response.AppleInApp.PurchaseDateMs">
+            <summary>
+            原始应用购买时间（以UNIX纪元时间格式），以毫秒为单位。使用此时间格式来处理日期。对于自动续订的订阅，此值指示订阅的首次购买日期。原始购买日期适用于所有产品类型，并且在相同商品ID的所有交易中都保持不变。该值对应于StoreKit中原始交易的属性。transactionDate
+            </summary>
+        </member>
+        <member name="P:Applepay.AspNetCore.Response.AppleInApp.PurchaseDatePst">
+            <summary>
+            原始应用购买时间（太平洋时间）。
+            </summary>
+        </member>
+        <member name="P:Applepay.AspNetCore.Response.AppleInApp.Quantity">
+            <summary>
+            购买的消费品数量。该值对应于SKPayment存储在交易的付款属性中的对象的数量属性。该值通常是“1”除非可以通过可变付款进行修改。最大值为10。
+            </summary>
+        </member>
+        <member name="P:Applepay.AspNetCore.Response.AppleInApp.TransactionId">
+            <summary>
+            交易的唯一标识符，例如购买，还原或续订。请参阅以获取更多信息。transaction_id
+            </summary>
+        </member>
+        <member name="P:Applepay.AspNetCore.Response.AppleInApp.WebOrderLineItemId">
+            <summary>
+            跨设备购买事件（包括订阅更新事件）的唯一标识符。此值是识别订阅购买的主键。
+            </summary>
+        </member>
+        <member name="T:Applepay.AspNetCore.Response.AppleTradeAppPayResponse">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Applepay.AspNetCore.Response.AppleTradeAppPayResponse.OutTradeNo">
+            <summary>
+            订单号
+            </summary>
+        </member>
+        <member name="P:Applepay.AspNetCore.Response.AppleTradeAppPayResponse.ProductId">
+            <summary>
+            产品ID
+            </summary>
+        </member>
+        <member name="P:Applepay.AspNetCore.Response.AppleTradeAppPayResponse.Sign">
+            <summary>
+            加密串
+            </summary>
+        </member>
+        <member name="P:Applepay.AspNetCore.Response.AppleTradeAppPayResponse.NotifyUrl">
+            <summary>
+            支付成功回调地址
+            </summary>
+        </member>
+        <member name="T:Applepay.AspNetCore.Util.HttpService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Applepay.AspNetCore.Util.HttpService.CheckValidationResult(System.Object,System.Security.Cryptography.X509Certificates.X509Certificate,System.Security.Cryptography.X509Certificates.X509Chain,System.Net.Security.SslPolicyErrors)">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Applepay.AspNetCore.Util.HttpService.PostAsync(System.String,System.String,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="url"></param>
+            <param name="datas"></param>
+            <param name="timeout"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Applepay.AspNetCore.Util.HttpService.GetAsync(System.String)">
+            <summary>
+            处理http GET请求，返回数据
+            </summary>
+            <param name="url">请求的url地址</param>
+            <returns>http GET成功后返回的数据，失败抛WebException异常</returns>
+        </member>
+        <member name="M:Applepay.AspNetCore.Util.HttpService.ExecuteAsync(Applepay.AspNetCore.Domain.ApplepayData,Applepay.AspNetCore.Domain.ApplepayConfig,System.String,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="inputObj"></param>
+            <param name="certPath"></param>
+            <param name="certPassword"></param>
+            <param name="timeout"></param>
+            <param name="url"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

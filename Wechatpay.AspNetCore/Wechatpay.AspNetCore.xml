@@ -1,0 +1,1171 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Wechatpay.AspNetCore</name>
+    </assembly>
+    <members>
+        <member name="T:Wechatpay.AspNetCore.Constants.WechatConstants">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Wechatpay.AspNetCore.Constants.WechatConstants.MD5">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Wechatpay.AspNetCore.Constants.WechatConstants.HMAC_SHA256">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Wechatpay.AspNetCore.Constants.WechatConstants.APP">
+            <summary>
+            APP支付
+            </summary>
+        </member>
+        <member name="F:Wechatpay.AspNetCore.Constants.WechatConstants.JSAPI">
+            <summary>
+            JSAPI支付/小程序支付
+            </summary>
+        </member>
+        <member name="F:Wechatpay.AspNetCore.Constants.WechatConstants.MWEB">
+            <summary>
+            H5支付
+            </summary>
+        </member>
+        <member name="F:Wechatpay.AspNetCore.Constants.WechatConstants.NATIVE">
+            <summary>
+            NATIVE支付
+            </summary>
+        </member>
+        <member name="F:Wechatpay.AspNetCore.Constants.WechatConstants.SUCCESS">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Wechatpay.AspNetCore.Constants.WechatConstants.REFUND">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Wechatpay.AspNetCore.Constants.WechatConstants.CLOSED">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Wechatpay.AspNetCore.Constants.WechatConstants.CODEURL">
+            <summary>
+            微信二维码地址
+            </summary>
+        </member>
+        <member name="F:Wechatpay.AspNetCore.Constants.WechatConstants.APPID">
+            <summary>
+            应用ID
+            </summary>
+        </member>
+        <member name="F:Wechatpay.AspNetCore.Constants.WechatConstants.PARTNERID">
+            <summary>
+            商户号mch_id
+            </summary>
+        </member>
+        <member name="F:Wechatpay.AspNetCore.Constants.WechatConstants.PREPAYID">
+            <summary>
+            预支付交易会话ID
+            </summary>
+        </member>
+        <member name="F:Wechatpay.AspNetCore.Constants.WechatConstants.PACKAGE">
+            <summary>
+            扩展字段
+            </summary>
+        </member>
+        <member name="F:Wechatpay.AspNetCore.Constants.WechatConstants.NONCESTR">
+            <summary>
+            随机字符串
+            </summary>
+        </member>
+        <member name="F:Wechatpay.AspNetCore.Constants.WechatConstants.TIMESTAMP">
+            <summary>
+            时间戳
+            </summary>
+        </member>
+        <member name="F:Wechatpay.AspNetCore.Constants.WechatConstants.SIGN">
+            <summary>
+            签名
+            </summary>
+        </member>
+        <member name="F:Wechatpay.AspNetCore.Constants.WechatConstants.SIGNTYPE">
+            <summary>
+            签名方式
+            </summary>
+        </member>
+        <member name="F:Wechatpay.AspNetCore.Constants.WechatConstants.PAYSIGN">
+            <summary>
+            签名
+            </summary>
+        </member>
+        <member name="F:Wechatpay.AspNetCore.Constants.WechatConstants.UnifiedOrderUrl">
+            <summary>
+            创建订单接口
+            </summary>
+        </member>
+        <member name="F:Wechatpay.AspNetCore.Constants.WechatConstants.QeuryOrderUrl">
+            <summary>
+            订单查询接口
+            </summary>
+        </member>
+        <member name="F:Wechatpay.AspNetCore.Constants.WechatConstants.ReverseOrderUrl">
+            <summary>
+            订单撤销接口
+            </summary>
+        </member>
+        <member name="F:Wechatpay.AspNetCore.Constants.WechatConstants.RefundOrderUrl">
+            <summary>
+            订单退款接口
+            </summary>
+        </member>
+        <member name="F:Wechatpay.AspNetCore.Constants.WechatConstants.RefundOrderQueryUrl">
+            <summary>
+            订单退款查询接口
+            </summary>
+        </member>
+        <member name="F:Wechatpay.AspNetCore.Constants.WechatConstants.CloseOrderUrl">
+            <summary>
+            订单关闭接口
+            </summary>
+        </member>
+        <member name="F:Wechatpay.AspNetCore.Constants.WechatConstants.DownloadBillUrl">
+            <summary>
+            下载账单接口
+            </summary>
+        </member>
+        <member name="T:Wechatpay.AspNetCore.WechatpayConfig">
+            <summary>
+            配置账号信息
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.WechatpayConfig.AppId">
+            <summary>
+            应用APPID
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.WechatpayConfig.MchId">
+            <summary>
+            商户号
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.WechatpayConfig.SignKey">
+            <summary>
+            用于签名的Key
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.WechatpayConfig.SignType">
+            <summary>
+            签名类型，目前支持HMAC-SHA256和MD5，默认为MD5
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.WechatpayConfig.CertPassword">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Wechatpay.AspNetCore.WechatpayData">
+            <summary>
+            微信支付协议接口数据类，所有的API接口通信都依赖这个数据结构，
+            在调用接口之前先填充各个字段的值，然后进行接口通信，
+            这样设计的好处是可扩展性强，用户可随意对协议进行更改而不用重新设计数据结构，
+            还可以随意组合出不同的协议数据包，不用为每个协议设计一个数据包结构
+            </summary>
+        </member>
+        <member name="M:Wechatpay.AspNetCore.WechatpayData.FromXml(System.String)">
+            @将xml转为WxPayData对象并返回对象内部的数据
+            @param string 待转换的xml串
+            @return 经转换得到的Dictionary
+            @throws WxPayException
+        </member>
+        <member name="M:Wechatpay.AspNetCore.WechatpayData.FromJson(System.String)">
+            <summary>
+            将Json格式数据转成网关数据
+            </summary>
+            <param name="json">json数据</param>
+            <returns></returns>
+        </member>
+        <member name="M:Wechatpay.AspNetCore.WechatpayData.FromObject(System.Object)">
+            <summary>
+            将数据转成网关数据
+            </summary>
+            <param name="res"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Wechatpay.AspNetCore.WechatpayData.GetElementValue(System.Object,System.Reflection.PropertyInfo)">
+            <summary>
+            获取对象的属性值
+            </summary>
+            <param name="res"></param>
+            <param name="pi"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Wechatpay.AspNetCore.WechatpayData.GetElementName(System.Reflection.PropertyInfo)">
+            <summary>
+            获取Xml属性名
+            </summary>
+            <param name="pi"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Wechatpay.AspNetCore.WechatpayData.SetValue(System.String,System.Object)">
+                    * 设置某个字段的值
+                    * @param key 字段名
+                     * @param value 字段值
+        </member>
+        <member name="M:Wechatpay.AspNetCore.WechatpayData.GetValue(System.String)">
+                    * 根据字段名获取某个字段的值
+                    * @param key 字段名
+                     * @return key对应的字段值
+        </member>
+        <member name="M:Wechatpay.AspNetCore.WechatpayData.ToObject``1">
+            <summary>
+            将网关参数转为类型
+            </summary>
+            <typeparam name="T">类型</typeparam>
+            <param name="stringCase">字符串策略</param>
+            <returns></returns>
+        </member>
+        <member name="M:Wechatpay.AspNetCore.WechatpayData.ToXml">
+             @将Dictionary转成xml
+             @return 经转换得到的xml串
+             @throws WxPayException
+            
+        </member>
+        <member name="M:Wechatpay.AspNetCore.WechatpayData.ToUrl">
+            @Dictionary格式转化成url参数格式
+            @ return url格式串, 该串不包含sign字段值
+        </member>
+        <member name="M:Wechatpay.AspNetCore.WechatpayData.ToJson">
+                    * @Dictionary格式化成Json
+                     * @return json串数据
+        </member>
+        <member name="M:Wechatpay.AspNetCore.WechatpayData.ToPrintStr">
+            @values格式化成能在Web页面上显示的结果（因为web页面上不能直接输出xml格式的字符串）
+        </member>
+        <member name="M:Wechatpay.AspNetCore.WechatpayData.IsSet(System.String)">
+            判断某个字段是否已设置
+            @param key 字段名
+            @return 若字段key已被设置，则返回true，否则返回false
+        </member>
+        <member name="M:Wechatpay.AspNetCore.WechatpayData.MakeSign(System.String,System.String)">
+            @生成签名，详见签名生成算法
+            @return 签名, sign字段不参加签名
+        </member>
+        <member name="M:Wechatpay.AspNetCore.WechatpayData.CheckSign(System.String,System.String)">
+            
+            检测签名是否正确
+            正确返回true，错误抛异常
+        </member>
+        <member name="M:Wechatpay.AspNetCore.WechatpayData.GetValues">
+            @获取Dictionary
+        </member>
+        <member name="M:Wechatpay.AspNetCore.WechatpayData.CalcHMACSHA256Hash(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="plaintext"></param>
+            <param name="salt"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Wechatpay.AspNetCore.IWechatRequest`1">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:Wechatpay.AspNetCore.Request.WechatRefundQueryRequest">
+            <summary>
+            退款查询
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Request.WechatRefundQueryRequest.TransactionId">
+            <summary>
+            微信订单号(微信订单号,商户订单号,商户退款单号,微信退款单号四选一)
+            </summary>
+            <remarks>微信生成的订单号，在支付通知中有返回</remarks>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Request.WechatRefundQueryRequest.OutTradeNo">
+            <summary>
+            商户订单号(微信订单号,商户订单号,商户退款单号,微信退款单号四选一)
+            </summary>
+            <remarks>商户系统内部订单号，要求32个字符内，只能是数字、大小写字母_-|*@ ，且在同一个商户号下唯一</remarks>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Request.WechatRefundQueryRequest.OutRefundNo">
+            <summary>
+            商户退款单号(微信订单号,商户订单号,商户退款单号,微信退款单号四选一)
+            </summary>
+            <remarks>商户系统内部的退款单号，商户系统内部唯一，只能是数字、大小写字母_-|*@ ，同一退款单号多次请求只退一笔</remarks>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Request.WechatRefundQueryRequest.RefundId">
+            <summary>
+            微信退款单号(微信订单号,商户订单号,商户退款单号,微信退款单号四选一)
+            </summary>
+            <remarks>微信生成的退款单号，在申请退款接口有返回</remarks>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Request.WechatRefundQueryRequest.Offset">
+            <summary>
+            偏移量
+            </summary>
+            <remarks>偏移量，当部分退款次数超过10次时可使用，表示返回的查询结果从这个偏移量开始取记录</remarks>
+        </member>
+        <member name="T:Wechatpay.AspNetCore.Request.WechatRefundRequest">
+            <summary>
+            退款
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Request.WechatRefundRequest.TransactionId">
+            <summary>
+            微信订单号(与商户订单号必须二选一)
+            </summary>
+            <remarks>微信生成的订单号，在支付通知中有返回</remarks>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Request.WechatRefundRequest.OutTradeNo">
+            <summary>
+            商户订单号(与微信订单号必须二选一)
+            </summary>
+            <remarks>商户系统内部订单号，要求32个字符内，只能是数字、大小写字母_-|*@ ，且在同一个商户号下唯一</remarks>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Request.WechatRefundRequest.OutRefundNo">
+            <summary>
+            商户退款单号(必填)
+            </summary>
+            <remarks>商户系统内部的退款单号，商户系统内部唯一，只能是数字、大小写字母_-|*@ ，同一退款单号多次请求只退一笔</remarks>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Request.WechatRefundRequest.TotalFee">
+            <summary>
+            订单金额(必填)
+            </summary>
+            <remarks>订单总金额，单位为分，只能为整数</remarks>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Request.WechatRefundRequest.RefundFee">
+            <summary>
+            退款金额(必填)
+            </summary>
+            <remarks>退款总金额，订单总金额，单位为分，只能为整数</remarks>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Request.WechatRefundRequest.RefundFeeType">
+            <summary>
+            退款货币种类
+            </summary>
+            <remarks>退款货币类型，需与支付一致，或者不填。符合ISO 4217标准的三位字母代码，默认人民币：CNY</remarks>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Request.WechatRefundRequest.RefundDesc">
+            <summary>
+            退款原因
+            </summary>
+            <remarks>若商户传入，会在下发给用户的退款消息中体现退款原因</remarks>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Request.WechatRefundRequest.RefundAccount">
+            <summary>
+            退款资金来源
+            </summary>
+            <remarks>仅针对老资金流商户使用 REFUND_SOURCE_UNSETTLED_FUNDS---未结算资金退款（默认使用未结算资金退款）REFUND_SOURCE_RECHARGE_FUNDS---可用余额退款</remarks>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Request.WechatRefundRequest.NotifyUrl">
+            <summary>
+            退款结果通知url
+            </summary>
+            <remarks>异步接收微信支付退款结果通知的回调地址，通知URL必须为外网可访问的url，不允许带参数,如果参数中传了notify_url，则商户平台上配置的回调地址将不会生效</remarks>
+        </member>
+        <member name="T:Wechatpay.AspNetCore.Request.WechatTradeAppPayRequest">
+            <summary>
+            微信订单
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Request.WechatTradeAppPayRequest.OpenId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Request.WechatTradeAppPayRequest.ProductId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Request.WechatTradeAppPayRequest.Body">
+            <summary>
+            商品简单描述，该字段请按照规范传递，具体请见参数规定
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Request.WechatTradeAppPayRequest.Detail">
+            <summary>
+            商品详细描述，对于使用单品优惠的商户，改字段必须按照规范上传，详见“单品优惠参数说明”
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Request.WechatTradeAppPayRequest.Attach">
+            <summary>
+            附加数据，在查询API和支付通知中原样返回，可作为自定义参数使用。
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Request.WechatTradeAppPayRequest.FeeType">
+            <summary>
+            标价币种,符合ISO 4217标准的三位字母代码，默认人民币：CNY，详细列表请参见货币类型
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Request.WechatTradeAppPayRequest.OutTradeNo">
+            <summary>
+            商户系统内部订单号，要求32个字符内，只能是数字、大小写字母_-|*@ ，且在同一个商户号下唯一。详见商户订单号
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Request.WechatTradeAppPayRequest.TotalFee">
+            <summary>
+            标价金额,订单总金额*100
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Request.WechatTradeAppPayRequest.TimeStart">
+            <summary>
+            订单生成时间，格式为yyyyMMddHHmmss，如2009年12月25日9点10分10秒表示为20091225091010。其他详见时间规则
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Request.WechatTradeAppPayRequest.TimeExpire">
+            <summary>
+            订单失效时间，格式为yyyyMMddHHmmss，如2009年12月27日9点10分10秒表示为20091227091010。其他详见时间规则
+            注意：最短失效时间间隔必须大于5分钟
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Request.WechatTradeAppPayRequest.GoodsTag">
+            <summary>
+            订单优惠标记,使用代金券或立减优惠功能时需要的参数，说明详见代金券或立减优惠
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Request.WechatTradeAppPayRequest.LimitPay">
+            <summary>
+            指定支付方式,上传此参数no_credit--可限制用户不能使用信用卡支付
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Request.WechatTradeAppPayRequest.TradeType">
+            <summary>
+            交易类型
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Request.WechatTradeAppPayRequest.NotifyUrl">
+            <summary>
+            网关回发通知URL
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Request.WechatTradeAppPayRequest.SpbillCreateIp">
+            <summary>
+            终端IP
+            </summary>
+        </member>
+        <member name="T:Wechatpay.AspNetCore.Request.WechatTradeCloseRequest">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Request.WechatTradeCloseRequest.OutTradeNo">
+            <summary>
+            商户订单号(与微信订单号必须二选一)
+            </summary>
+            <remarks>商户系统内部订单号，要求32个字符内，只能是数字、大小写字母_-|*@ ，且在同一个商户号下唯一</remarks>
+        </member>
+        <member name="T:Wechatpay.AspNetCore.Request.WechatTradeDownloadRequest">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Request.WechatTradeDownloadRequest.BillDate">
+            <summary>
+            账单时间：下载对账单的日期，格式：20140603
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Request.WechatTradeDownloadRequest.BillType">
+            <summary>
+            账单类型，ALL（默认值），返回当日所有订单信息（不含充值退款订单）
+            SUCCESS，返回当日成功支付的订单（不含充值退款订单）
+            REFUND，返回当日退款订单（不含充值退款订单）
+            RECHARGE_REFUND，返回当日充值退款订单
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Request.WechatTradeDownloadRequest.TarType">
+            <summary>
+            压缩账单 非必传参数，固定值：GZIP，返回格式为.gzip的压缩包账单。不传则默认为数据流形式。
+            </summary>
+        </member>
+        <member name="T:Wechatpay.AspNetCore.Request.WechatTradeQueryRequest">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Request.WechatTradeQueryRequest.TransactionId">
+            <summary>
+            微信订单号(与商户订单号必须二选一)
+            </summary>
+            <remarks>微信生成的订单号，在支付通知中有返回</remarks>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Request.WechatTradeQueryRequest.OutTradeNo">
+            <summary>
+            商户订单号(与微信订单号必须二选一)
+            </summary>
+            <remarks>商户系统内部订单号，要求32个字符内，只能是数字、大小写字母_-|*@ ，且在同一个商户号下唯一</remarks>
+        </member>
+        <member name="T:Wechatpay.AspNetCore.Response.WechatNotifyResponse">
+            <summary>
+            微信支付成功回调
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatNotifyResponse.OpenId">
+            <summary>
+            用户标识
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatNotifyResponse.IsSubscribe">
+            <summary>
+            是否关注公众账号 (用户是否关注公众账号，Y-关注，N-未关注)
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatNotifyResponse.TradeType">
+            <summary>
+            交易类型
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatNotifyResponse.TradeState">
+            <summary>
+            交易状态
+            SUCCESS—支付成功
+            REFUND—转入退款
+            NOTPAY—未支付
+            CLOSED—已关闭
+            REVOKED—已撤销（刷卡支付）
+            USERPAYING--用户支付中
+            PAYERROR--支付失败(其他原因，如银行返回失败)
+            支付状态机请见下单API页面
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatNotifyResponse.BankType">
+            <summary>
+            付款银行
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatNotifyResponse.TotalFee">
+            <summary>
+            总金额(订单总金额，单位为分)
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatNotifyResponse.FeeType">
+            <summary>
+            货币种类
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatNotifyResponse.CashFee">
+            <summary>
+            现金支付金额(单位为分)
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatNotifyResponse.CashFeeType">
+            <summary>
+            现金支付货币类型
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatNotifyResponse.OutTradeNo">
+            <summary>
+            商户系统内部订单号，要求32个字符内，只能是数字、大小写字母_-|*@ ，且在同一个商户号下唯一。详见商户订单号
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatNotifyResponse.TransactionId">
+            <summary>
+            微信支付订单号
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatNotifyResponse.Attach">
+            <summary>
+            附加数据，原样返回
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatNotifyResponse.TimeEnd">
+            <summary>
+            支付完成时间
+            </summary>
+        </member>
+        <member name="T:Wechatpay.AspNetCore.Response.WechatRefundQueryResponse">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatRefundQueryResponse.TotalRefundCount">
+            <summary>
+            订单总退款次数
+            </summary>
+            <remarks>订单总共已发生的部分退款次数，当请求参数传入offset后有返回</remarks>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatRefundQueryResponse.TransactionId">
+            <summary>
+            微信订单号(必填)
+            </summary>
+            <remarks>微信生成的订单号，在支付通知中有返回</remarks>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatRefundQueryResponse.OutTradeNo">
+            <summary>
+            商户订单号(必填) 
+            </summary>
+            <remarks>商户系统内部订单号，要求32个字符内，只能是数字、大小写字母_-|*@ ，且在同一个商户号下唯一</remarks>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatRefundQueryResponse.TotalFee">
+            <summary>
+            标价金额(必填)
+            </summary>
+            <remarks>订单总金额，单位为分，只能为整数</remarks>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatRefundQueryResponse.SettlementTotalFee">
+            <summary>
+            应结订单金额
+            </summary>
+            <remarks>去掉非充值代金券金额后的订单总金额，应结订单金额=订单金额-非充值代金券金额，应结订单金额＜=订单金额。 </remarks>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatRefundQueryResponse.FeeType">
+            <summary>
+            标价币种
+            </summary>
+            <remarks>订单金额货币类型，符合ISO 4217标准的三位字母代码，默认人民币：CNY</remarks>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatRefundQueryResponse.CashFee">
+            <summary>
+            现金支付金额(必填)
+            </summary>
+            <remarks>现金支付金额，单位为分，只能为整数</remarks>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatRefundQueryResponse.RefundCount">
+            <summary>
+            退款笔数
+            </summary>
+            <remarks>当前返回退款笔数</remarks>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatRefundQueryResponse.OutRefundNo_0">
+            <summary>
+            商户退款单号
+            </summary>
+            <remarks>商户系统内部的退款单号，商户系统内部唯一，只能是数字、大小写字母_-|*@ ，同一退款单号多次请求只退一笔</remarks>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatRefundQueryResponse.RefundId_0">
+            <summary>
+            微信退款单号
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatRefundQueryResponse.RefundChannel_0">
+            <summary>
+            退款渠道
+            </summary>
+            <remarks>ORIGINAL—原路退款 BALANCE—退回到余额 OTHER_BALANCE—原账户异常退到其他余额账户 OTHER_BANKCARD—原银行卡异常退到其他银行卡</remarks>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatRefundQueryResponse.RefundFee_0">
+            <summary>
+            申请退款金额
+            </summary>
+            <remarks>退款总金额,单位为分,可以做部分退款</remarks>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatRefundQueryResponse.SettlementRefundFee_0">
+            <summary>
+            退款金额
+            </summary>
+            <remarks>退款金额=申请退款金额-非充值代金券退款金额，退款金额＜=申请退款金额</remarks>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatRefundQueryResponse.RefundStatus_0">
+            <summary>
+            退款状态
+            </summary>
+            <remarks>退款状态：SUCCESS—退款成功 REFUNDCLOSE—退款关闭。PROCESSING—退款处理中CHANGE—退款异常，退款到银行发现用户的卡作废或者冻结了，导致原路退款银行卡失败，可前往商户平台（pay.weixin.qq.com）-交易中心，手动处理此笔退款</remarks>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatRefundQueryResponse.RefundAccount_0">
+            <summary>
+            退款资金来源
+            </summary>
+            <remarks>REFUND_SOURCE_RECHARGE_FUNDS---可用余额退款/基本账户 REFUND_SOURCE_UNSETTLED_FUNDS---未结算资金退款</remarks>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatRefundQueryResponse.RefundRecvAccout_0">
+            <summary>
+            退款入账账户
+            </summary>
+            <remarks>取当前退款单的退款入账方 1）退回银行卡：{银行名称}{卡类型}{卡尾号} 2）退回支付用户零钱:支付用户零钱 3）退还商户:商户基本账户 商户结算银行账户 4）退回支付用户零钱通:支付用户零钱通</remarks>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatRefundQueryResponse.RefundSuccessTime_0">
+            <summary>
+            退款成功时间
+            </summary>
+            <remarks>退款成功时间，当退款状态为退款成功时有返回</remarks>
+        </member>
+        <member name="T:Wechatpay.AspNetCore.Response.WechatRefundResponse">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatRefundResponse.TransactionId">
+            <summary>
+            微信订单号(必填)
+            </summary>
+            <remarks>微信生成的订单号，在支付通知中有返回</remarks>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatRefundResponse.OutTradeNo">
+            <summary>
+            商户订单号(必填) 
+            </summary>
+            <remarks>商户系统内部订单号，要求32个字符内，只能是数字、大小写字母_-|*@ ，且在同一个商户号下唯一</remarks>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatRefundResponse.OutRefundNo">
+            <summary>
+            商户退款单号(必填)
+            </summary>
+            <remarks>商户系统内部的退款单号，商户系统内部唯一，只能是数字、大小写字母_-|*@ ，同一退款单号多次请求只退一笔</remarks>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatRefundResponse.RefundId">
+            <summary>
+            微信退款单号(必填)
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatRefundResponse.RefundFee">
+            <summary>
+            退款金额(必填)
+            </summary>
+            <remarks>退款总金额,单位为分,可以做部分退款</remarks>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatRefundResponse.SettlementRefundFee">
+            <summary>
+            应结退款金额
+            </summary>
+            <remarks>去掉非充值代金券退款金额后的退款金额，退款金额=申请退款金额-非充值代金券退款金额，退款金额＜=申请退款金额</remarks>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatRefundResponse.TotalFee">
+            <summary>
+            标价金额(必填)
+            </summary>
+            <remarks>订单总金额，单位为分，只能为整数</remarks>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatRefundResponse.SettlementTotalFee">
+            <summary>
+            应结订单金额
+            </summary>
+            <remarks>去掉非充值代金券金额后的订单总金额，应结订单金额=订单金额-非充值代金券金额，应结订单金额＜=订单金额。 </remarks>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatRefundResponse.FeeType">
+            <summary>
+            标价币种
+            </summary>
+            <remarks>订单金额货币类型，符合ISO 4217标准的三位字母代码，默认人民币：CNY</remarks>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatRefundResponse.CashFee">
+            <summary>
+            现金支付金额(必填)
+            </summary>
+            <remarks>现金支付金额，单位为分，只能为整数</remarks>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatRefundResponse.CashFeeType">
+            <summary>
+            现金支付币种
+            </summary>
+            <remarks>货币类型，符合ISO 4217标准的三位字母代码，默认人民币：CNY</remarks>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatRefundResponse.CashRefundFee">
+            <summary>
+            现金退款金额
+            </summary>
+            <remarks>现金退款金额，单位为分，只能为整数</remarks>
+        </member>
+        <member name="T:Wechatpay.AspNetCore.Response.WechatResponse">
+            <summary>
+            微信响应通用数据
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatResponse.ReturnCode">
+            <summary>
+            返回状态码
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatResponse.ReturnMsg">
+            <summary>
+            返回信息
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatResponse.ResultCode">
+            <summary>
+            业务结果
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatResponse.NonceStr">
+            <summary>
+            随机字符串
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatResponse.Sign">
+            <summary>
+            签名
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatResponse.SignType">
+            <summary>
+            签名类型
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatResponse.ErrCode">
+            <summary>
+            错误代码
+            </summary>
+            <remarks>列表详见错误码列表</remarks>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatResponse.ErrCodeDes">
+            <summary>
+            错误代码描述
+            </summary>
+            <remarks>结果信息描述</remarks>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatResponse.AppId">
+            <summary>
+            公众账号ID(必填)
+            </summary>
+            <remarks>微信分配的公众账号ID（企业号corpid即为此appId）</remarks>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatResponse.MchId">
+            <summary>
+            商户号(必填)
+            </summary>
+            <remarks>微信支付分配的商户号</remarks>
+        </member>
+        <member name="T:Wechatpay.AspNetCore.Response.WechatTradeAppPayResponse">
+            <summary>
+            统一下单
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatTradeAppPayResponse.PrepayId">
+            <summary>
+            预支付交易会话标识（微信生成的预支付回话标识，用于后续接口调用中使用，该值有效期为2小时）
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatTradeAppPayResponse.TradeType">
+            <summary>
+            交易类型 （调用接口提交的交易类型，取值如下：JSAPI，NATIVE，APP，详细说明见参数规定）
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatTradeAppPayResponse.CodeUrl">
+            <summary>
+            trade_type=NATIVE时有返回，此url用于生成支付二维码，然后提供给用户进行扫码支付。
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatTradeAppPayResponse.Body">
+            <summary>
+            APP端调起支付的参数
+            </summary>
+        </member>
+        <member name="T:Wechatpay.AspNetCore.Response.WechatTradeCloseResponse">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Wechatpay.AspNetCore.Response.WechatTradeDownloadResponse">
+            <summary>
+            下载交易账单
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatTradeDownloadResponse.Body">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Wechatpay.AspNetCore.Response.WechatTradeQueryResponse">
+            <summary>
+            查询订单
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatTradeQueryResponse.DeviceInfo">
+            <summary>
+            设备号
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatTradeQueryResponse.OpenId">
+            <summary>
+            用户标识
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatTradeQueryResponse.IsSubscribe">
+            <summary>
+            是否关注公众账号 (用户是否关注公众账号，Y-关注，N-未关注)
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatTradeQueryResponse.TradeType">
+            <summary>
+            交易类型
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatTradeQueryResponse.TradeState">
+            <summary>
+            交易状态
+            SUCCESS—支付成功
+            REFUND—转入退款
+            NOTPAY—未支付
+            CLOSED—已关闭
+            REVOKED—已撤销（刷卡支付）
+            USERPAYING--用户支付中
+            PAYERROR--支付失败(其他原因，如银行返回失败)
+            支付状态机请见下单API页面
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatTradeQueryResponse.BankType">
+            <summary>
+            付款银行
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatTradeQueryResponse.TotalFee">
+            <summary>
+            总金额(订单总金额，单位为分)
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatTradeQueryResponse.FeeType">
+            <summary>
+            货币种类
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatTradeQueryResponse.CashFee">
+            <summary>
+            现金支付金额(单位为分)
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatTradeQueryResponse.CashFeeType">
+            <summary>
+            现金支付货币类型
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatTradeQueryResponse.OutTradeNo">
+            <summary>
+            商户系统内部订单号，要求32个字符内，只能是数字、大小写字母_-|*@ ，且在同一个商户号下唯一。详见商户订单号
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatTradeQueryResponse.TransactionId">
+            <summary>
+            微信支付订单号
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatTradeQueryResponse.Attach">
+            <summary>
+            附加数据，原样返回
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatTradeQueryResponse.TimeEnd">
+            <summary>
+            支付完成时间
+            </summary>
+        </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatTradeQueryResponse.TradeStateDesc">
+            <summary>
+            交易状态描述
+            </summary>
+        </member>
+        <member name="T:Wechatpay.AspNetCore.HttpService">
+            <summary>
+            微信支付
+            </summary>
+        </member>
+        <member name="M:Wechatpay.AspNetCore.HttpService.CheckValidationResult(System.Object,System.Security.Cryptography.X509Certificates.X509Certificate,System.Security.Cryptography.X509Certificates.X509Chain,System.Net.Security.SslPolicyErrors)">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Wechatpay.AspNetCore.HttpService.PostAsync(System.String,System.String,System.Boolean,System.Int32,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="xml"></param>
+            <param name="url"></param>
+            <param name="isUseCert"></param>
+            <param name="timeout"></param>
+            <param name="certPath"></param>
+            <param name="certPassword"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Wechatpay.AspNetCore.HttpService.GetAsync(System.String)">
+            <summary>
+            处理http GET请求，返回数据
+            </summary>
+            <param name="url">请求的url地址</param>
+            <returns>http GET成功后返回的数据，失败抛WebException异常</returns>
+        </member>
+        <member name="M:Wechatpay.AspNetCore.HttpService.ExecuteAsync``1(Wechatpay.AspNetCore.IWechatRequest{``0},Wechatpay.AspNetCore.WechatpayConfig,System.String,System.Boolean,System.Int32)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="request"></param>
+            <param name="config"></param>
+            <param name="url"></param>
+            <param name="isUseCert"></param>
+            <param name="timeout"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Wechatpay.AspNetCore.HttpService.ExecuteAsync(Wechatpay.AspNetCore.WechatpayData,Wechatpay.AspNetCore.WechatpayConfig,System.String,System.Boolean,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="inputObj"></param>
+            <param name="config"></param>
+            <param name="url"></param>
+            <param name="isUseCert"></param>
+            <param name="timeout"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Wechatpay.AspNetCore.HttpService.GetAppData(Wechatpay.AspNetCore.WechatpayConfig,System.Object,System.String,System.String)">
+            <summary>
+            创建支付调起微信参数
+            </summary>
+            <param name="config"></param>
+            <param name="prepay_id"></param>
+            <param name="tradeType"></param>
+            <param name="codeUrl"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Wechatpay.AspNetCore.HttpService.GenerateOutTradeNo(Wechatpay.AspNetCore.WechatpayConfig)">
+            <summary>
+            根据当前系统时间加随机序列来生成订单号
+            </summary>
+            <param name="config"></param>
+            <returns>订单号</returns>
+        </member>
+        <member name="M:Wechatpay.AspNetCore.HttpService.GenerateTimeStamp">
+            <summary>
+            生成时间戳，标准北京时间，时区为东八区，自1970年1月1日 0点0分0秒以来的秒数
+            </summary>
+            <returns>时间戳</returns>
+        </member>
+        <member name="M:Wechatpay.AspNetCore.HttpService.GenerateNonceStr">
+            <summary>
+            生成随机串，随机串包含字母或数字
+            </summary>
+            <returns>随机串</returns>
+        </member>
+        <member name="T:Wechatpay.AspNetCore.WechatpayClient">
+            <summary>
+            微信支付
+            </summary>
+        </member>
+        <member name="M:Wechatpay.AspNetCore.WechatpayClient.Notify(Wechatpay.AspNetCore.WechatpayData,Wechatpay.AspNetCore.WechatpayConfig)">
+            <summary>
+            支付成功回调
+            </summary>
+            <param name="request"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Wechatpay.AspNetCore.WechatpayClient.CreateOrderAsync(Wechatpay.AspNetCore.Request.WechatTradeAppPayRequest,Wechatpay.AspNetCore.WechatpayConfig,System.Int32)">
+            <summary>
+            统一下单
+            </summary>
+            <param name="request">提交给统一下单API的参数</param>
+            <param name="config"></param>
+            <param name="timeOut">超时时间</param>
+            <returns>成功时返回，其他抛异常</returns>
+        </member>
+        <member name="M:Wechatpay.AspNetCore.WechatpayClient.OrderQueryAsync(Wechatpay.AspNetCore.Request.WechatTradeQueryRequest,Wechatpay.AspNetCore.WechatpayConfig,System.Int32)">
+            <summary>
+            查询订单
+            </summary>
+            <param name="request">提交给查询订单API的参数</param>
+            <param name="config"></param>
+            <param name="timeOut">超时时间</param>
+            <returns>成功时返回订单查询结果，其他抛异常</returns>
+        </member>
+        <member name="M:Wechatpay.AspNetCore.WechatpayClient.RefundAsync(Wechatpay.AspNetCore.Request.WechatRefundRequest,Wechatpay.AspNetCore.WechatpayConfig,System.Int32)">
+            <summary>
+            申请退款
+            </summary>
+            <param name="request">提交给申请退款API的参数</param>
+            <param name="config"></param>
+            <param name="timeOut">超时时间</param>
+            <returns>成功时返回接口调用结果，其他抛异常</returns>
+        </member>
+        <member name="M:Wechatpay.AspNetCore.WechatpayClient.RefundQueryAsync(Wechatpay.AspNetCore.Request.WechatRefundQueryRequest,Wechatpay.AspNetCore.WechatpayConfig,System.Int32)">
+            <summary>
+            查询退款
+            提交退款申请后，通过该接口查询退款状态。退款有一定延时
+            用零钱支付的退款20分钟内到账，银行卡支付的退款3个工作日后重新查询退款状态。
+            </summary>
+            <param name="request">out_refund_no、out_trade_no、transaction_id、refund_id四个参数必填一个</param>
+            <param name="config"></param>
+            <param name="timeOut">接口超时时间</param>
+            <returns>成功时返回，其他抛异常</returns>
+        </member>
+        <member name="M:Wechatpay.AspNetCore.WechatpayClient.CloseOrderAsync(Wechatpay.AspNetCore.Request.WechatTradeCloseRequest,Wechatpay.AspNetCore.WechatpayConfig,System.Int32)">
+            <summary>
+            关闭订单
+            </summary>
+            <param name="request">提交给关闭订单API的参数</param>
+            <param name="config"></param>
+            <param name="timeOut">接口超时时间</param>
+            <returns>成功时返回，其他抛异常</returns>
+        </member>
+        <member name="M:Wechatpay.AspNetCore.WechatpayClient.DownloadBillAsync(Wechatpay.AspNetCore.Request.WechatTradeDownloadRequest,Wechatpay.AspNetCore.WechatpayConfig,System.Int32)">
+            <summary>
+            下载对账单
+            </summary>
+            <param name="request">提交给下载对账单API的参数</param>
+            <param name="config"></param>
+            <param name="timeOut">接口超时时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:Wechatpay.AspNetCore.WechatpayClient.CreateOrderAsync(Wechatpay.AspNetCore.WechatpayData,Wechatpay.AspNetCore.WechatpayConfig,System.Int32)">
+            <summary>
+            统一下单
+            </summary>
+            <param name="request">提交给统一下单API的参数</param>
+            <param name="config"></param>
+            <param name="timeOut">超时时间</param>
+            <returns>成功时返回，其他抛异常</returns>
+        </member>
+        <member name="M:Wechatpay.AspNetCore.WechatpayClient.OrderQueryAsync(Wechatpay.AspNetCore.WechatpayData,Wechatpay.AspNetCore.WechatpayConfig,System.Int32)">
+            <summary>
+            查询订单
+            </summary>
+            <param name="request">提交给查询订单API的参数</param>
+            <param name="config"></param>
+            <param name="timeOut">超时时间</param>
+            <returns>成功时返回订单查询结果，其他抛异常</returns>
+        </member>
+        <member name="M:Wechatpay.AspNetCore.WechatpayClient.ReverseAsyns(Wechatpay.AspNetCore.WechatpayData,Wechatpay.AspNetCore.WechatpayConfig,System.Int32)">
+            <summary>
+            撤销订单API接口
+            </summary>
+            <param name="request">提交给撤销订单API接口的参数，out_trade_no和transaction_id必填一个</param>
+            <param name="config"></param>
+            <param name="timeOut">接口超时时间</param>
+            <returns>成功时返回API调用结果，其他抛异常</returns>
+        </member>
+        <member name="M:Wechatpay.AspNetCore.WechatpayClient.RefundAsync(Wechatpay.AspNetCore.WechatpayData,Wechatpay.AspNetCore.WechatpayConfig,System.Int32)">
+            <summary>
+            申请退款
+            </summary>
+            <param name="request">提交给申请退款API的参数</param>
+            <param name="config"></param>
+            <param name="timeOut">超时时间</param>
+            <returns>成功时返回接口调用结果，其他抛异常</returns>
+        </member>
+        <member name="M:Wechatpay.AspNetCore.WechatpayClient.RefundQueryAsync(Wechatpay.AspNetCore.WechatpayData,Wechatpay.AspNetCore.WechatpayConfig,System.Int32)">
+            <summary>
+            查询退款
+            提交退款申请后，通过该接口查询退款状态。退款有一定延时
+            用零钱支付的退款20分钟内到账，银行卡支付的退款3个工作日后重新查询退款状态。
+            </summary>
+            <param name="request">out_refund_no、out_trade_no、transaction_id、refund_id四个参数必填一个</param>
+            <param name="config"></param>
+            <param name="timeOut">接口超时时间</param>
+            <returns>成功时返回，其他抛异常</returns>
+        </member>
+        <member name="M:Wechatpay.AspNetCore.WechatpayClient.CloseOrderAsync(Wechatpay.AspNetCore.WechatpayData,Wechatpay.AspNetCore.WechatpayConfig,System.Int32)">
+            <summary>
+            关闭订单
+            </summary>
+            <param name="request">提交给关闭订单API的参数</param>
+            <param name="config"></param>
+            <param name="timeOut">接口超时时间</param>
+            <returns>成功时返回，其他抛异常</returns>
+        </member>
+        <member name="M:Wechatpay.AspNetCore.WechatpayClient.DownloadBillAsync(Wechatpay.AspNetCore.WechatpayData,Wechatpay.AspNetCore.WechatpayConfig,System.Int32)">
+            <summary>
+            下载对账单
+            </summary>
+            <param name="request">提交给下载对账单API的参数</param>
+            <param name="config"></param>
+            <param name="timeOut">接口超时时间</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

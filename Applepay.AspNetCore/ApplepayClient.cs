@@ -29,7 +29,7 @@ namespace Applepay.AspNetCore
             //验证签名,不通过会抛异常
             if (!checkData.CheckSign(config.SignType, config.SignKey))
             {
-                throw new Exception("签名校验失败");
+                throw new Exception("苹果签名校验失败");
             }
             // 验证参数
             if (string.IsNullOrEmpty(request.AppleReceipt) || request.AppleReceipt.Length < 20)

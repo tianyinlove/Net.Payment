@@ -9,7 +9,11 @@
     <Company>Alex</Company>
     <Product>Applepay.AspNetCore</Product>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.0.4</Version>
+    <Version>1.0.6</Version>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>E:\project\develop\Alex\Net.Payment\Applepay.AspNetCore\Applepay.AspNetCore.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

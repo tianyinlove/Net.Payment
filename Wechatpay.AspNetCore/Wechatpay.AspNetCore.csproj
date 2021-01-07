@@ -12,7 +12,11 @@
 6、支付成功回调
 7、增加二维码支付</Description>
     <Authors>Alex</Authors>
-    <Version>1.0.11</Version>
+    <Version>1.0.12</Version>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>E:\project\develop\Alex\Net.Payment\Wechatpay.AspNetCore\Wechatpay.AspNetCore.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
