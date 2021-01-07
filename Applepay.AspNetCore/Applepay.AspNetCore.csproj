@@ -9,7 +9,7 @@
     <Company>Alex</Company>
     <Product>Applepay.AspNetCore</Product>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.0.3</Version>
+    <Version>1.0.4</Version>
   </PropertyGroup>
 
   <ItemGroup>

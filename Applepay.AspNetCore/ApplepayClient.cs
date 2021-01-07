@@ -22,7 +22,7 @@ namespace Applepay.AspNetCore
         /// <param name="request"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public static async Task<List<AppleInApp>> Notify(ApplepayNotifyRequest request, ApplepayConfig config, int timeOut = 6)
+        public static async Task<ApplepayNotifyResponse> Notify(ApplepayNotifyRequest request, ApplepayConfig config, int timeOut = 6)
         {
             var checkData = new ApplepayData();
             checkData.FromObject(request);
@@ -45,11 +45,11 @@ namespace Applepay.AspNetCore
             {
                 throw new Exception("苹果支付凭证验证失败");
             }
-            if (result.Receipt == null || result.Receipt.BundleId != config.BundleId || result.Receipt.InApp == null || result.Receipt.InApp.Count <= 0)
+            if (result.Receipt == null || result.Receipt.BundleId != config.BundleId)
             {
                 throw new Exception("苹果支付订单无效");
             }
-            return result.Receipt.InApp;
+            return result;
         }
 
         /// <summary>
