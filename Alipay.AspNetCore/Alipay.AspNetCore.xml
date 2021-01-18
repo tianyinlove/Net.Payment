@@ -17,6 +17,24 @@
             <param name="config"></param>
             <returns></returns>
         </member>
+        <member name="M:Alipay.AspNetCore.AlipayClient.CreateOrder(Alipay.AspNetCore.Domain.AlipayTradePayModel,Alipay.AspNetCore.Domain.AlipayConfig,System.Int32)">
+            <summary>
+            统一收单交易支付接口
+            </summary>
+            <param name="request">提交给统一下单API的参数</param>
+            <param name="config"></param>
+            <param name="timeOut">超时时间</param>
+            <returns>成功时返回，其他抛异常</returns>
+        </member>
+        <member name="M:Alipay.AspNetCore.AlipayClient.CreateOrder(Alipay.AspNetCore.Domain.AlipayTradePagePayModel,Alipay.AspNetCore.Domain.AlipayConfig,System.Int32)">
+            <summary>
+            电脑网站支付统一下单
+            </summary>
+            <param name="request">提交给统一下单API的参数</param>
+            <param name="config"></param>
+            <param name="timeOut">超时时间</param>
+            <returns>成功时返回，其他抛异常</returns>
+        </member>
         <member name="M:Alipay.AspNetCore.AlipayClient.CreateOrder(Alipay.AspNetCore.Domain.AlipayTradeAppPayModel,Alipay.AspNetCore.Domain.AlipayConfig,System.Int32)">
             <summary>
             App统一下单
@@ -167,6 +185,56 @@
         <member name="P:Alipay.AspNetCore.Domain.AccessParams.Channel">
             <summary>
             目前支持以下值：  1. ALIPAYAPP  （钱包h5页面签约）  2. QRCODE(扫码签约)  3. QRCODEORSMS(扫码签约或者短信签约)
+            </summary>
+        </member>
+        <member name="T:Alipay.AspNetCore.Domain.AgreementSignParams">
+            <summary>
+            AgreementSignParams Data Structure.
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Domain.AgreementSignParams.BuckleAppId">
+            <summary>
+            商户在芝麻端申请的appId
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Domain.AgreementSignParams.BuckleMerchantId">
+            <summary>
+            商户在芝麻端申请的merchantId
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Domain.AgreementSignParams.ExternalAgreementNo">
+            <summary>
+            商户签约号，代扣协议中标示用户的唯一签约号（确保在商户系统中唯一）。  格式规则：支持大写小写字母和数字，最长32位。  商户系统按需传入，如果同一用户在同一产品码、同一签约场景下，签订了多份代扣协议，那么需要指定并传入该值。
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Domain.AgreementSignParams.ExternalLogonId">
+            <summary>
+            用户在商户网站的登录账号，用于在签约页面展示，如果为空，则不展示
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Domain.AgreementSignParams.PersonalProductCode">
+            <summary>
+            个人签约产品码，商户和支付宝签约时确定。
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Domain.AgreementSignParams.PromoParams">
+            <summary>
+            签约营销参数，此值为json格式；具体的key需与营销约定
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Domain.AgreementSignParams.SignScene">
+            <summary>
+            协议签约场景，商户和支付宝签约时确定。  当传入商户签约号external_agreement_no时，场景不能为默认值DEFAULT|DEFAULT。
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Domain.AgreementSignParams.SignValidityPeriod">
+            <summary>
+            当前用户签约请求的协议有效周期。  整形数字加上时间单位的协议有效期，从发起签约请求的时间开始算起。  目前支持的时间单位：  1. d：天  2. m：月  如果未传入，默认为长期有效。
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Domain.AgreementSignParams.ThirdPartyType">
+            <summary>
+            签约第三方主体类型。对于三方协议，表示当前用户和哪一类的第三方主体进行签约。  取值范围：  1. PARTNER（平台商户）;  2. MERCHANT（集团商户），集团下子商户可共享用户签约内容;  默认为PARTNER。
             </summary>
         </member>
         <member name="T:Alipay.AspNetCore.Domain.AlipayConfig">
@@ -500,6 +568,266 @@
         <member name="P:Alipay.AspNetCore.Domain.AlipayTradeFastpayRefundQueryModel.TradeNo">
             <summary>
             支付宝交易号，和商户订单号不能同时为空
+            </summary>
+        </member>
+        <member name="T:Alipay.AspNetCore.Domain.AlipayTradePagePayModel">
+            <summary>
+            AlipayTradePagePayModel Data Structure.
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Domain.AlipayTradePagePayModel.AgreementSignParams">
+            <summary>
+            签约参数，支付后签约场景使用
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Domain.AlipayTradePagePayModel.Body">
+            <summary>
+            订单描述
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Domain.AlipayTradePagePayModel.BusinessParams">
+            <summary>
+            商户传入业务信息，具体值要和支付宝约定，应用于安全，营销等参数直传场景，格式为json格式
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Domain.AlipayTradePagePayModel.DisablePayChannels">
+            <summary>
+            禁用渠道,用户不可用指定渠道支付，多个渠道以逗号分割  注，与enable_pay_channels互斥  渠道列表：https://docs.open.alipay.com/common/wifww7
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Domain.AlipayTradePagePayModel.EnablePayChannels">
+            <summary>
+            可用渠道,用户只能在指定渠道范围内支付，多个渠道以逗号分割  注，与disable_pay_channels互斥  渠道列表：https://docs.open.alipay.com/common/wifww7
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Domain.AlipayTradePagePayModel.ExtUserInfo">
+            <summary>
+            外部指定买家
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Domain.AlipayTradePagePayModel.ExtendParams">
+            <summary>
+            业务扩展参数
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Domain.AlipayTradePagePayModel.GoodsDetail">
+            <summary>
+            订单包含的商品列表信息，json格式，其它说明详见商品明细说明
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Domain.AlipayTradePagePayModel.GoodsType">
+            <summary>
+            商品主类型 :0-虚拟类商品,1-实物类商品  注：虚拟类商品不支持使用花呗渠道
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Domain.AlipayTradePagePayModel.IntegrationType">
+            <summary>
+            请求后页面的集成方式。  取值范围：  1. ALIAPP：支付宝钱包内  2. PCWEB：PC端访问  默认值为PCWEB。
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Domain.AlipayTradePagePayModel.InvoiceInfo">
+            <summary>
+            开票信息
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Domain.AlipayTradePagePayModel.OutTradeNo">
+            <summary>
+            商户订单号,64个字符以内、可包含字母、数字、下划线；需保证在商户端不重复
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Domain.AlipayTradePagePayModel.PassbackParams">
+            <summary>
+            公用回传参数，如果请求时传递了该参数，则返回给商户时会回传该参数。支付宝只会在同步返回（包括跳转回商户网站）和异步通知时将该参数原样返回。本参数必须进行UrlEncode之后才可以发送给支付宝。
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Domain.AlipayTradePagePayModel.ProductCode">
+            <summary>
+            销售产品码，与支付宝签约的产品码名称。  注：目前仅支持FAST_INSTANT_TRADE_PAY
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Domain.AlipayTradePagePayModel.PromoParams">
+            <summary>
+            优惠参数  注：仅与支付宝协商后可用
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Domain.AlipayTradePagePayModel.QrPayMode">
+            <summary>
+            PC扫码支付的方式，支持前置模式和    跳转模式。  前置模式是将二维码前置到商户  的订单确认页的模式。需要商户在  自己的页面中以 iframe 方式请求  支付宝页面。具体分为以下几种：  0：订单码-简约前置模式，对应 iframe 宽度不能小于600px，高度不能小于300px；  1：订单码-前置模式，对应iframe 宽度不能小于 300px，高度不能小于600px；  3：订单码-迷你前置模式，对应 iframe 宽度不能小于 75px，高度不能小于75px；  4：订单码-可定义宽度的嵌入式二维码，商户可根据需要设定二维码的大小。    跳转模式下，用户的扫码界面是由支付宝生成的，不在商户的域名下。  2：订单码-跳转模式
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Domain.AlipayTradePagePayModel.QrcodeWidth">
+            <summary>
+            商户自定义二维码宽度  注：qr_pay_mode=4时该参数生效
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Domain.AlipayTradePagePayModel.RequestFromUrl">
+            <summary>
+            请求来源地址。如果使用ALIAPP的集成方式，用户中途取消支付会返回该地址。
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Domain.AlipayTradePagePayModel.RoyaltyInfo">
+            <summary>
+            描述分账信息，json格式，详见分账参数说明
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Domain.AlipayTradePagePayModel.SettleInfo">
+            <summary>
+            描述结算信息，json格式，详见结算参数说明
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Domain.AlipayTradePagePayModel.StoreId">
+            <summary>
+            商户门店编号
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Domain.AlipayTradePagePayModel.SubMerchant">
+            <summary>
+            间连受理商户信息体，当前只对特殊银行机构特定场景下使用此字段
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Domain.AlipayTradePagePayModel.Subject">
+            <summary>
+            订单标题
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Domain.AlipayTradePagePayModel.TimeExpire">
+            <summary>
+            绝对超时时间，格式为yyyy-MM-dd HH:mm
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Domain.AlipayTradePagePayModel.TimeoutExpress">
+            <summary>
+            该笔订单允许的最晚付款时间，逾期将关闭交易。取值范围：1m～15d。m-分钟，h-小时，d-天，1c-当天（1c-当天的情况下，无论交易何时创建，都在0点关闭）。 该参数数值不接受小数点， 如 1.5h，可转换为 90m
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Domain.AlipayTradePagePayModel.TotalAmount">
+            <summary>
+            订单总金额，单位为元，精确到小数点后两位，取值范围[0.01,100000000]。
+            </summary>
+        </member>
+        <member name="T:Alipay.AspNetCore.Domain.AlipayTradePayModel">
+            <summary>
+            AlipayTradePayModel Data Structure.
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Domain.AlipayTradePayModel.AlipayStoreId">
+            <summary>
+            支付宝的店铺编号
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Domain.AlipayTradePayModel.AuthCode">
+            <summary>
+            支付授权码，25~30开头的长度为16~24位的数字，实际字符串长度以开发者获取的付款码长度为准
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Domain.AlipayTradePayModel.AuthNo">
+            <summary>
+            预授权号，预授权转交易请求中传入，适用于预授权转交易业务使用，目前只支持FUND_TRADE_FAST_PAY（资金订单即时到帐交易）、境外预授权产品（OVERSEAS_AUTH_PAY）两个产品。
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Domain.AlipayTradePayModel.Body">
+            <summary>
+            订单描述
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Domain.AlipayTradePayModel.BuyerId">
+            <summary>
+            买家的支付宝用户id，如果为空，会从传入了码值信息中获取买家ID
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Domain.AlipayTradePayModel.DisablePayChannels">
+            <summary>
+            禁用支付渠道,多个渠道以逗号分割，如同时禁用信用支付类型和积分，则disable_pay_channels="credit_group,point"
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Domain.AlipayTradePayModel.DiscountableAmount">
+            <summary>
+            参与优惠计算的金额，单位为元，精确到小数点后两位，取值范围[0.01,100000000]。  如果该值未传入，但传入了【订单总金额】和【不可打折金额】，则该值默认为【订单总金额】-【不可打折金额】
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Domain.AlipayTradePayModel.ExtUserInfo">
+            <summary>
+            外部指定买家
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Domain.AlipayTradePayModel.ExtendParams">
+            <summary>
+            业务扩展参数
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Domain.AlipayTradePayModel.GoodsDetail">
+            <summary>
+            订单包含的商品列表信息，Json格式，其它说明详见商品明细说明
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Domain.AlipayTradePayModel.MerchantOrderNo">
+            <summary>
+            商户的原始订单号
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Domain.AlipayTradePayModel.OperatorId">
+            <summary>
+            商户操作员编号
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Domain.AlipayTradePayModel.OutTradeNo">
+            <summary>
+            商户订单号,64个字符以内、可包含字母、数字、下划线；需保证在商户端不重复
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Domain.AlipayTradePayModel.ProductCode">
+            <summary>
+            销售产品码
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Domain.AlipayTradePayModel.RoyaltyInfo">
+            <summary>
+            描述分账信息，Json格式，其它说明详见分账说明
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Domain.AlipayTradePayModel.Scene">
+            <summary>
+            支付场景  条码支付，取值：bar_code  声波支付，取值：wave_code
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Domain.AlipayTradePayModel.SellerId">
+            <summary>
+            如果该值为空，则默认为商户签约账号对应的支付宝用户ID
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Domain.AlipayTradePayModel.StoreId">
+            <summary>
+            商户门店编号
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Domain.AlipayTradePayModel.SubMerchant">
+            <summary>
+            间连受理商户信息体，当前只对特殊银行机构特定场景下使用此字段
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Domain.AlipayTradePayModel.Subject">
+            <summary>
+            订单标题
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Domain.AlipayTradePayModel.TerminalId">
+            <summary>
+            商户机具终端编号
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Domain.AlipayTradePayModel.TimeoutExpress">
+            <summary>
+            该笔订单允许的最晚付款时间，逾期将关闭交易。取值范围：1m～15d。m-分钟，h-小时，d-天，1c-当天（1c-当天的情况下，无论交易何时创建，都在0点关闭）。 该参数数值不接受小数点， 如 1.5h，可转换为 90m
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Domain.AlipayTradePayModel.TotalAmount">
+            <summary>
+            订单总金额，单位为元，精确到小数点后两位，取值范围[0.01,100000000]  如果同时传入【可打折金额】和【不可打折金额】，该参数可以不用传入；  如果同时传入了【可打折金额】，【不可打折金额】，【订单总金额】三者，则必须满足如下条件：【订单总金额】=【可打折金额】+【不可打折金额】
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Domain.AlipayTradePayModel.UndiscountableAmount">
+            <summary>
+            不参与优惠计算的金额，单位为元，精确到小数点后两位，取值范围[0.01,100000000]。如果该值未传入，但传入了【订单总金额】和【可打折金额】，则该值默认为【订单总金额】-【可打折金额】
             </summary>
         </member>
         <member name="T:Alipay.AspNetCore.Domain.AlipayTradePrecreateModel">
@@ -2283,6 +2611,26 @@
             商户可使用该接口查询自已通过alipay.trade.refund提交的退款请求是否执行成功。
             </summary>
         </member>
+        <member name="T:Alipay.AspNetCore.Request.AlipayTradePagePayRequest">
+            <summary>
+            AOP API: alipay.trade.page.pay
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Request.AlipayTradePagePayRequest.BizContent">
+            <summary>
+            统一收单下单并支付页面接口
+            </summary>
+        </member>
+        <member name="T:Alipay.AspNetCore.Request.AlipayTradePayRequest">
+            <summary>
+            AOP API: alipay.trade.pay
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Request.AlipayTradePayRequest.BizContent">
+            <summary>
+            用于在线下场景交易一次创建并支付掉  修改路由策略到R
+            </summary>
+        </member>
         <member name="T:Alipay.AspNetCore.Request.AlipayTradePrecreateRequest">
             <summary>
             AOP API: alipay.trade.precreate
@@ -2677,6 +3025,116 @@
         <member name="P:Alipay.AspNetCore.Response.AlipayTradeFastpayRefundQueryResponse.TradeNo">
             <summary>
             支付宝交易号
+            </summary>
+        </member>
+        <member name="T:Alipay.AspNetCore.Response.AlipayTradePagePayResponse">
+            <summary>
+            AlipayTradePagePayResponse.
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Response.AlipayTradePagePayResponse.OutTradeNo">
+            <summary>
+            商户订单号
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Response.AlipayTradePagePayResponse.SellerId">
+            <summary>
+            收款支付宝账号对应的支付宝唯一用户号。  以2088开头的纯16位数字
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Response.AlipayTradePagePayResponse.TotalAmount">
+            <summary>
+            交易金额
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Response.AlipayTradePagePayResponse.TradeNo">
+            <summary>
+            支付宝交易号
+            </summary>
+        </member>
+        <member name="T:Alipay.AspNetCore.Response.AlipayTradePayResponse">
+            <summary>
+            AlipayTradePayResponse.
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Response.AlipayTradePayResponse.BuyerLogonId">
+            <summary>
+            买家支付宝账号
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Response.AlipayTradePayResponse.BuyerPayAmount">
+            <summary>
+            买家付款的金额
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Response.AlipayTradePayResponse.BuyerUserId">
+            <summary>
+            买家在支付宝的用户id
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Response.AlipayTradePayResponse.CardBalance">
+            <summary>
+            支付宝卡余额
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Response.AlipayTradePayResponse.DiscountGoodsDetail">
+            <summary>
+            本次交易支付所使用的单品券优惠的商品优惠信息
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Response.AlipayTradePayResponse.FundBillList">
+            <summary>
+            交易支付使用的资金渠道
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Response.AlipayTradePayResponse.GmtPayment">
+            <summary>
+            交易支付时间
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Response.AlipayTradePayResponse.InvoiceAmount">
+            <summary>
+            交易中可给用户开具发票的金额
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Response.AlipayTradePayResponse.OpenId">
+            <summary>
+            买家支付宝用户号,该参数已废弃，请不要使用
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Response.AlipayTradePayResponse.OutTradeNo">
+            <summary>
+            商户订单号
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Response.AlipayTradePayResponse.PointAmount">
+            <summary>
+            使用积分宝付款的金额
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Response.AlipayTradePayResponse.ReceiptAmount">
+            <summary>
+            实收金额
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Response.AlipayTradePayResponse.StoreName">
+            <summary>
+            发生支付交易的商户门店名称
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Response.AlipayTradePayResponse.TotalAmount">
+            <summary>
+            交易金额
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Response.AlipayTradePayResponse.TradeNo">
+            <summary>
+            支付宝交易号
+            </summary>
+        </member>
+        <member name="P:Alipay.AspNetCore.Response.AlipayTradePayResponse.VoucherDetailList">
+            <summary>
+            本交易支付时使用的所有优惠券信息
             </summary>
         </member>
         <member name="T:Alipay.AspNetCore.Response.AlipayTradePrecreateResponse">

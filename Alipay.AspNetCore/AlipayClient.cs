@@ -32,6 +32,42 @@ namespace Alipay.AspNetCore
         }
 
         /// <summary>
+        /// 统一收单交易支付接口
+        /// </summary>
+        /// <param name="request">提交给统一下单API的参数</param>
+        /// <param name="config"></param>
+        /// <param name="timeOut">超时时间</param>
+        /// <returns>成功时返回，其他抛异常</returns>
+        public static async Task<AlipayTradePayResponse> CreateOrder(AlipayTradePayModel request, AlipayConfig config, int timeOut = 6)
+        {
+            IAopClient client = new AopClient(AlipayConstants.GATEWAYURL, config.AppId, config.PrivateKey, config.Format, config.Version, config.SignType, config.AliPublicKey, config.Charset, config.KeyFromFile);
+            var requestData = new AlipayTradePayRequest();
+            requestData.SetNotifyUrl(config.NotifyUrl);
+            requestData.SetReturnUrl(config.QuitUrl);
+            requestData.SetBizModel(request);
+
+            return await client.ExecuteAsync(requestData);
+        }
+
+        /// <summary>
+        /// 电脑网站支付统一下单
+        /// </summary>
+        /// <param name="request">提交给统一下单API的参数</param>
+        /// <param name="config"></param>
+        /// <param name="timeOut">超时时间</param>
+        /// <returns>成功时返回，其他抛异常</returns>
+        public static async Task<AlipayTradePagePayResponse> CreateOrder(AlipayTradePagePayModel request, AlipayConfig config, int timeOut = 6)
+        {
+            IAopClient client = new AopClient(AlipayConstants.GATEWAYURL, config.AppId, config.PrivateKey, config.Format, config.Version, config.SignType, config.AliPublicKey, config.Charset, config.KeyFromFile);
+            var requestData = new AlipayTradePagePayRequest();
+            requestData.SetNotifyUrl(config.NotifyUrl);
+            requestData.SetReturnUrl(config.QuitUrl);
+            requestData.SetBizModel(request);
+
+            return await client.PageExecute(requestData);
+        }
+
+        /// <summary>
         /// App统一下单
         /// </summary>
         /// <param name="request">提交给统一下单API的参数</param>
