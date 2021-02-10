@@ -843,6 +843,11 @@
             trade_type=NATIVE时有返回，此url用于生成支付二维码，然后提供给用户进行扫码支付。
             </summary>
         </member>
+        <member name="P:Wechatpay.AspNetCore.Response.WechatTradeAppPayResponse.H5Url">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="P:Wechatpay.AspNetCore.Response.WechatTradeAppPayResponse.Body">
             <summary>
             APP端调起支付的参数

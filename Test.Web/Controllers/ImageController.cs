@@ -88,7 +88,7 @@ namespace Test.Web.Controllers
                 Body = "产品",
                 Detail = "产品",
                 TimeExpire = DateTime.Now.AddHours(2).ToString("yyyyMMddHHmmss"),
-                TradeType = WechatConstants.NATIVE,
+                TradeType = WechatConstants.MWEB,
                 TimeStart = DateTime.Now.ToString("yyyyMMddHHmmss"),
                 NotifyUrl = "http://mobiletest.emoney.cn/mdata/payment/api/wechat/wechatnotity"
             };

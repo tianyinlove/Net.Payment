@@ -31,6 +31,12 @@ namespace Wechatpay.AspNetCore.Response
         [JsonProperty("code_url")]
         public string CodeUrl { get; set; }
         /// <summary>
+        /// 
+        /// </summary>
+        [XmlElement("mweb_url")]
+        [JsonProperty("mweb_url")]
+        public string H5Url { get; set; }
+        /// <summary>
         /// APP端调起支付的参数
         /// </summary>
         public string Body { get; set; }
