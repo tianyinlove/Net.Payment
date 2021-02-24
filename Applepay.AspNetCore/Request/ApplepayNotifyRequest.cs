@@ -13,6 +13,13 @@ namespace Applepay.AspNetCore.Request
     public class ApplepayNotifyRequest : IApplepayRequest<ApplepayNotifyResponse>
     {
         /// <summary>
+        /// 交易号
+        /// </summary>
+        [XmlElement("transactionId")]
+        [JsonProperty("transactionId")]
+        public string TransactionId { get; set; }
+
+        /// <summary>
         /// 订单号
         /// </summary>
         [XmlElement("outtradeno")]

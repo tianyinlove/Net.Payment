@@ -213,6 +213,11 @@
             
             </summary>
         </member>
+        <member name="P:Applepay.AspNetCore.Request.ApplepayNotifyRequest.TransactionId">
+            <summary>
+            交易号
+            </summary>
+        </member>
         <member name="P:Applepay.AspNetCore.Request.ApplepayNotifyRequest.OutTradeNo">
             <summary>
             订单号
