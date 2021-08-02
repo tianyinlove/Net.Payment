@@ -43,11 +43,11 @@ namespace Applepay.AspNetCore
             var result = JsonConvert.DeserializeObject<ApplepayNotifyResponse>(response);
             if (result.Status != AppleConstants.SUCCESS)
             {
-                throw new Exception("苹果支付凭证验证失败");
+                throw new Exception($"苹果支付凭证验证失败:{response}");
             }
             if (result.Receipt == null || result.Receipt.BundleId != config.BundleId)
             {
-                throw new Exception("苹果支付订单无效");
+                throw new Exception($"苹果支付订单无效:{response}");
             }
             return result;
         }
